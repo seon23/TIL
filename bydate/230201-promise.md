@@ -81,6 +81,9 @@
 </script>
 ```
 
-[참고] [json placeholder 사이트](https://jsonplaceholder.typicode.com/) 이용
+[이용할 사이트]  
+[json placeholder 사이트](https://jsonplaceholder.typicode.com/) 이용
 - 프로토타입으로 웹사이트 만들 때, 쉽게 서버를 마련할 수 있다.
 - [/posts 링크](https://jsonplaceholder.typicode.com/posts) 클릭 -> 각각의 글들을 json이라는 데이터 타입으로 만들어서 응답해주는 url
+
+[MDN - Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
