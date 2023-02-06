@@ -1,3 +1,4 @@
+# Javascript
 - 원시 타입은 pass-by-value로 전달
 - 객체 타입은 pass-by-reference로 전달
 - 참고로 배열, 함수, 정규표현식은 객체 타입 데이터이다.
