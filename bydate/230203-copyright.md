@@ -14,7 +14,7 @@
 
 - [Github 리포지토리에 라이선스 추가](https://docs.github.com/ko/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository)
 
-## 공식 문서 라이선스
+## 공식 문서별 라이선스 설명
 - [MDN - 저작자 표시 및 저작권 라이선싱](https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license#using_mdn_web_docs_content)
     ~~- MDN 문서를 참조하고서 출처를 남길 때
         > Mozilla 기여자가 작성한 [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)는 [CC-BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/) 라이선스에 따라 사용할 수 있습니다.~~
