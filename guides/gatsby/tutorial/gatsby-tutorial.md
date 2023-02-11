@@ -1,6 +1,14 @@
 # 개츠비 공식 문서 튜토리얼
 작성 시작: 2023-02-09  
+gatsby 폴더 내의 모든 문서는 다음의 라이센스를 따릅니다.
+(여기에 개츠비가 게시한 라이센스 사본)
 
+mdn 폴더 내의 모든 문서는 다음의 라이센스를 따릅니다.
+
+그냥 이런 식으로 LICENSE.md에 게시해도 될 것 같다.
+
+
+일단 guides/gatsby 폴더의 저작권 표시는 하되, 
 <details><summary>목차</summary>
 <p>
 
@@ -12,8 +20,16 @@
 - [Summary](#summary)
     - [Key Takeaways](#key-takeaways)
 
-[Part 3: Add Features with Plugins
-](#part-3-add-features-with-plugins)
+[Part 3: Add Features with Plugins](#part-3-add-features-with-plugins)
+- [plugin이란?](#plugin이란)
+- [사이트에 plugin 추가](#사이트에-plugin-추가)
+- [Task: 홈페이지에 static image 넣기(`gastby-plugin-image`)](#task-gastby-plugin-image를-사용해-홈페이지에-static-image-넣기)
+
+[Part 4: Query for Data with GraphQL](#part-4-query-for-data-with-graphql)
+- [Introducton](#introduction)
+- [Gatsby의 GraphQL data layer](#gatsby의-graphql-data-layer)
+
+
 
 ## Part2: Use and Style React Component
 
@@ -56,6 +72,8 @@
 - **props**로 컴포넌트 렌더링 방식을 바꿀 수 있다. 컴포넌트 빌드 시 고유한 props를 정의할 수 있다. 리액트는 `children`, `className`같은 built-in props 또한 가지고 있다.
 
 - 개츠비에서는 기본적으로 **CSS Modules**로 style 작업을 한다.
+
+---
 
 ## Part 3: Add Features with Plugins
 
@@ -121,5 +139,6 @@ module.exports = {
 3. **Use the plugin** features in your site, as needed.
 
 ### Task: `gastby-plugin-image`를 사용해 홈페이지에 static image 넣기
-해당 플러그인은 다른 플러그인을 필요로 하는데, 관련 설명은 [여기](https://www.gatsbyjs.com/docs/tutorial/part-3/#introduction:~:text=The%20StaticImage%20component%20requires,install%20it%20for%20now.))에서 확인 가능하다.
+해당 플러그인은 다른 플러그인을 필요로 하는데, 관련 설명은 [여기](https://www.gatsbyjs.com/docs/tutorial/part-3/#introduction:~:text=The%20StaticImage%20component%20requires,install%20it%20for%20now.)에서 확인 가능하다.
 
+---
