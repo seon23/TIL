@@ -28,10 +28,10 @@
 - 여기서 then이 바로 Promise이다.
 
 <p align="center">
-    <img src="../Images/json-example.JPG" width="400">
+    <img src="../images/json-example.JPG" width="400">
 </p> 
 <p align="center">
-    <img src="../Images/json-to-javascript.JPG" width="500">
+    <img src="../images/json-to-javascript.JPG" width="500">
 </p> 
 
 ```
@@ -44,9 +44,6 @@
     // 1, 2가 먼저 출력되는 동안 fetch가 json 데이터를 자바스크립트 형식의 데이터로 바꾸는 작업이 실행된다.
     // 1, 2, 데이터 순으로 출력된다.
 </script>
-```
-
-```
 ```
 
 > [A Promise that resolves to a Response object.](https://developer.mozilla.org/en-US/docs/Web/API/fetch#return_value)
