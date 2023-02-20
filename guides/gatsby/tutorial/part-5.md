@@ -162,7 +162,7 @@ Wow look at all this content. How do they do it?
 ### Task: MDX transformer plugin(및 dependency) 설치 후 설정
 `gatsby-plugin-mdx` 패키지는 dependency 하나를 추가로 실행할 것을 요구한다. 바로, MDX로 구현한 내용을 리액트 컴포넌트로 맵핑하는 `@mdx-js/react`이다. 
 
-1. 아래 명령어로 `gatsby-plugin-mdx`와 dependency를 설치한다. (이 명령어를 통해 패키지 두 개가 `package.json`의 `dependencies` 객체와 `node_modules`폴더에 추가된다.)  
+1. 아래 명령어로 `gatsby-plugin-mdx`와 dependency를 설치한다. (그러면 `package.json`의 `dependencies` 객체와 `node_modules`폴더에 모두 추가된다.)  
     ```sh
     npm install gatsby-plugin-mdx @mdx-js/react
     ``` 
@@ -192,7 +192,184 @@ Wow look at all this content. How do they do it?
 
 <br>
 
-### Task: 블로그 페이지 쿼리 업데이트해서 allFile 대신 allMdx 필드 사용하기
+### Task: Blog 페이지 쿼리를 업데이트해서 `allFile` 대신 `allMdx` 필드 사용하기
+`gatsby-plugin-mdx` 플러그인을 통해 새로운 필드(`allMdx`와 `mdx`)를 GraphQL 쿼리에서 사용할 수 있다. 이번에는 `allMdx`를 사용해서 Blog 페이지에 작성해 놓은 컨텐츠(.mdx)를 추가한다. (`mdx` 필드는 Part6에서 사용 예정)
+
+`allMdx`를 사용해서 다수의 MDX 노드에 대한 데이터를 한 번에 요청할 수 있다. (`allFile`이 File 노드에 접근했던 방식과 유사하다). GraphiQL을 열고 어떤 필드가 MDX 노드에서 사용 가능한지를 탐색한다. 
+
+> **Quic Refresher:** [“Use GraphiQL to explore the data layer and write GraphQL queries”](https://www.gatsbyjs.com/docs/tutorial/part-4/#use-graphiql-to-explore-the-data-layer-and-write-graphql-queries)에서 GraphiQL 접근 방법 참고
+
+GraphiQL에서 `allFile` 대신 `allMdx` 필드를 사용해서 블로그 게시물 데이터를 가져오는 새로운 쿼리를 생성한다.
+
+1. `allMdx` 아래에 `nodes` 드롭다운을 연다. `frontmatter` 드롭다운 안에서는, MDX 파일의 frontmatter에서 생성했던 모든 키에 대한 필드를 볼 수 있다. `title`과 `date` 필드를 선택한다. `date` 필드의 인자로 `formatString`를 사용해 날짜가 표현되는 방식을 변경한다.
+```
+query MyQuery {
+  allMdx {
+    nodes {
+      frontmatter {
+        date(formatString: "MMMM D, YYYY")
+        title
+      }
+    }
+  }
+}
+```
+> **Syntax Hink**: frontmatter에 있는 dates 사용에 관해서, `formatString` 인자는 날짜가 보이는 방식을 변경하는 데에 도움이 되는 도구이다.<br><br>
+> frontmatter에서, `"YYYY-MM-DD"` 같은 날짜 포맷을 사용하는 key와 value를 가진다고 상상해 보자. (value만 필수 형식을 지키면 key에는 어떤 이름이 오든 상관 없다.) GraphiQL은 value가 날짜인지를 자동으로 감지하며, 상응하는 frontmatter field를 Explorer 창에서 선택할 때 GrahiQL은 해당 필드로 전달할 수 있는 인자 몇 개를 자동으로 보여준다. 그 인자 중 하나가 `formatString`인데, 이를 통해 [`Moment.js formatting token`](https://momentjs.com/docs/#/displaying/format/)을 전달해서 날짜 표시 방식을 변경할 수 있다.<br><br>
+> 예시: MDX frontmatter가 다음과 같다면,
+```MDX
+date: "2023-02-20"
+```
+> 그리고 GraphQL 쿼리는 다음과 같다면,
+```
+query MyQuery {
+  allMdx {
+    nodes {
+      frontmatter {
+        date(formatString: "MMMM D, YYYY")
+      }
+    }
+  }
+}
+```
+> 응답 데이터는 `"February 20, 2023"`일 것이다.
+
+2. 하는 김에, `id` 필드를 추가한다. 이건 개츠비가 데이터 레이어에 있는 모든 노드에 자동으로 추가하는 유니크한 문자열이다. (게시물 리스트를 iterate할 때, 이걸 React `key`로 사용할 수 있다.)
+```
+query MyQuery {
+  allMdx {
+    nodes {
+      frontmatter {
+        date(formatString: "MMMM D, YYYY")
+        title
+      }
+      id
+    }
+  }
+}
+```
+
+3. query를 실행한다. 응답 객체는 다음과 같이 보일 것이다.
+```JSON
+{
+  "data": {
+    "allMdx": {
+      "nodes": [
+        {
+          "frontmatter": {
+            "date": "July 25, 2021",
+            "title": "Yet Another Post"
+          },
+          "id": "c4b5ae6d-f3ad-5ea4-ab54-b08a72badea1"
+        },
+        {
+          "frontmatter": {
+            "date": "July 23, 2021",
+            "title": "My First Post"
+          },
+          "id": "11b3a825-30c5-551d-a713-dd748e7d554a"
+        },
+        {
+          "frontmatter": {
+            "date": "July 24, 2021",
+            "title": "Another Post"
+          },
+          "id": "560896e4-0148-59b8-9a2b-bf79bee68fba"
+        }
+      ]
+    }
+  },
+  "extensions": {}
+}
+```
+
+4. 게시물이 순서대로 나열되지 않았다. 대부분의 블로그 사이트는 게시물을 역순으로 나열해서 최신 게시물이 처음으로 배치된다. `allMdx` 필드에서 `sort` 인자를 사용함으로써 해당 데이터 노드를 정렬할 수 있다.
+    - Explorer 창에서, `allMdx` 필드 아래에 있는 `sort` 토글 버튼을 누른다.
+    - `sort` 아래에 `frontmatter` 인자를 체크, 드롭다운 목록에서 `DESC`를 선택한다. 그러면 노드가 내림차순(descending order)으로 정렬되어 마지막에 올린 게시물이 처음에 배치된다.
+```
+query MyQuery {
+  allMdx(sort: { frontmatter: { date: DESC } }) {
+    nodes {
+      frontmatter {
+        date(formatString: "MMMM D, YYYY")
+        title
+      }
+      id
+    }
+  }
+}
+```
+
+5. 예상 쿼리 실행 결과는 다음과 같다.
+```JSON
+{
+  "data": {
+    "allMdx": {
+      "nodes": [
+        {
+          "frontmatter": {
+            "date": "July 25, 2021",
+            "title": "Yet Another Post"
+          },
+          "id": "c4b5ae6d-f3ad-5ea4-ab54-b08a72badea1"
+        },
+        {
+          "frontmatter": {
+            "date": "July 24, 2021",
+            "title": "Another Post"
+          },
+          "id": "560896e4-0148-59b8-9a2b-bf79bee68fba"
+        },
+        {
+          "frontmatter": {
+            "date": "July 23, 2021",
+            "title": "My First Post"
+          },
+          "id": "11b3a825-30c5-551d-a713-dd748e7d554a"
+        }
+      ]
+    }
+  },
+  "extensions": {}
+}
+```
+
+6. 게시물 프리뷰도 쿼리에 추가하자. (`excerpt` 필드)
+```
+query MyQuery {
+  allMdx(sort: { frontmatter: { date: DESC } }) {
+    nodes {
+      frontmatter {
+        date(formatString: "MMMM D, YYYY")
+        title
+      }
+      id
+      excerpt
+    }
+  }
+}
+```
+
+7. 쿼리를 실행하면 `excerpt` 필드 데이터는 다음과 같을 것이다
+```JSON
+"excerpt": "Wow look at all this content. How do they do it?"
+```
+
+> :bulb: **Pro Tip:** transformer 플러그인은 새로운 노드를 생성할 때 이 노드의 오리지널 소스 노드를 참조하는 `parent` 필드를 추가한다. 예를 들어, `gatsby-plugin-mdx`는 새 MDX 노드를 생성할 때, 오리지널 File 노드의 데이터에 접근하는 데에 사용할 `parent`필드를 추가한다.<br>
+> transformed nodes의 데이터와 original source nodes의 데이터를 함께 사용하고 싶을 때 `parent` 노드는 유용하다. 예를 들어, 아래 쿼리는 파일이 변경된 시간을 알려주어서, 게시물이 마지막으로 업데이트된 때를 표기할 때 사용할 수 있다.
+```
+query MyQuery {
+  allMdx {
+    nodes {
+      parent {
+        ... on File {
+          modifiedTime(formatString: "MMMM D, YYYY")
+        }
+      }
+    }
+  }
+}
+```
 
 ### Task: 게시물 발췌 부분을 블로그 페이지에 렌더링
 ## 요약
