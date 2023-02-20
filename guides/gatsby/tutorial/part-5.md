@@ -193,15 +193,15 @@ Wow look at all this content. How do they do it?
 <br>
 
 ### Task: Blog 페이지 쿼리를 업데이트해서 `allFile` 대신 `allMdx` 필드 사용하기
-`gatsby-plugin-mdx` 플러그인을 통해 새로운 필드(`allMdx`와 `mdx`)를 GraphQL 쿼리에서 사용할 수 있다. 이번에는 `allMdx`를 사용해서 Blog 페이지에 작성해 놓은 컨텐츠(.mdx)를 추가한다. (`mdx` 필드는 Part6에서 사용 예정)
+`gatsby-plugin-mdx` 플러그인을 통해 새로운 필드(`allMdx`와 `mdx`)를 GraphQL 쿼리에서 사용할 수 있다. 이번 장에서는 `allMdx`를 사용해서 Blog 페이지에 작성해 놓은 컨텐츠(.mdx)를 추가한다. (`mdx` 필드는 Part6에서 사용 예정)
 
-`allMdx`를 사용해서 다수의 MDX 노드에 대한 데이터를 한 번에 요청할 수 있다. (`allFile`이 File 노드에 접근했던 방식과 유사하다). GraphiQL을 열고 어떤 필드가 MDX 노드에서 사용 가능한지를 탐색한다. 
+`allMdx`를 사용해서 다수의 MDX 노드 데이터를 한 번에 요청할 수 있다. (`allFile`이 File 노드에 접근했던 방식과 유사하다). GraphiQL을 열고 어떤 필드가 MDX 노드에서 사용 가능한지를 탐색해 보자.
 
-> **Quic Refresher:** [“Use GraphiQL to explore the data layer and write GraphQL queries”](https://www.gatsbyjs.com/docs/tutorial/part-4/#use-graphiql-to-explore-the-data-layer-and-write-graphql-queries)에서 GraphiQL 접근 방법 참고
+> **Quick Refresher:** [“Use GraphiQL to explore the data layer and write GraphQL queries”](https://www.gatsbyjs.com/docs/tutorial/part-4/#use-graphiql-to-explore-the-data-layer-and-write-graphql-queries)에서 GraphiQL 접근 방법 참고
 
 GraphiQL에서 `allFile` 대신 `allMdx` 필드를 사용해서 블로그 게시물 데이터를 가져오는 새로운 쿼리를 생성한다.
 
-1. `allMdx` 아래에 `nodes` 드롭다운을 연다. `frontmatter` 드롭다운 안에서는, MDX 파일의 frontmatter에서 생성했던 모든 키에 대한 필드를 볼 수 있다. `title`과 `date` 필드를 선택한다. `date` 필드의 인자로 `formatString`를 사용해 날짜가 표현되는 방식을 변경한다.
+1. `allMdx` &rarr; `nodes` &rarr; `frontmatter` 드롭다운 목록을 차례로 클릭한다. 그러면 MDX 파일 내 frontmatter에서 생성했던 모든 키에 대한 필드를 볼 수 있다. `title`과 `date` 필드를 선택한다. `date` 필드의 인자로 `formatString`를 사용해 날짜가 표현되는 방식을 변경한다.
 ```
 query MyQuery {
   allMdx {
@@ -214,7 +214,7 @@ query MyQuery {
   }
 }
 ```
-> **Syntax Hink**: frontmatter에 있는 dates 사용에 관해서, `formatString` 인자는 날짜가 보이는 방식을 변경하는 데에 도움이 되는 도구이다.<br><br>
+> **Syntax Hink**: `formatString` 인자는 날짜가 보이는 방식을 변경할 때 유용한 도구이다.<br><br>
 > frontmatter에서, `"YYYY-MM-DD"` 같은 날짜 포맷을 사용하는 key와 value를 가진다고 상상해 보자. (value만 필수 형식을 지키면 key에는 어떤 이름이 오든 상관 없다.) GraphiQL은 value가 날짜인지를 자동으로 감지하며, 상응하는 frontmatter field를 Explorer 창에서 선택할 때 GrahiQL은 해당 필드로 전달할 수 있는 인자 몇 개를 자동으로 보여준다. 그 인자 중 하나가 `formatString`인데, 이를 통해 [`Moment.js formatting token`](https://momentjs.com/docs/#/displaying/format/)을 전달해서 날짜 표시 방식을 변경할 수 있다.<br><br>
 > 예시: MDX frontmatter가 다음과 같다면,
 ```MDX
@@ -284,8 +284,8 @@ query MyQuery {
 ```
 
 4. 게시물이 순서대로 나열되지 않았다. 대부분의 블로그 사이트는 게시물을 역순으로 나열해서 최신 게시물이 처음으로 배치된다. `allMdx` 필드에서 `sort` 인자를 사용함으로써 해당 데이터 노드를 정렬할 수 있다.
-    - Explorer 창에서, `allMdx` 필드 아래에 있는 `sort` 토글 버튼을 누른다.
-    - `sort` 아래에 `frontmatter` 인자를 체크, 드롭다운 목록에서 `DESC`를 선택한다. 그러면 노드가 내림차순(descending order)으로 정렬되어 마지막에 올린 게시물이 처음에 배치된다.
+    - Explorer 창에서, `allMdx` 필드 아래에 있는 `sort`를 클릭한다.
+    - `sort` 아래에 `frontmatter` 인자를 체크, date 드롭다운 목록에서 `DESC`를 선택한다. 그러면 노드가 내림차순(descending order)으로 정렬되어 마지막에 올린 게시물이 처음에 배치된다.
 ```
 query MyQuery {
   allMdx(sort: { frontmatter: { date: DESC } }) {
