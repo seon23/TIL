@@ -199,6 +199,8 @@ Wow look at all this content. How do they do it?
 
 > **Quick Refresher:** [“Use GraphiQL to explore the data layer and write GraphQL queries”](https://www.gatsbyjs.com/docs/tutorial/part-4/#use-graphiql-to-explore-the-data-layer-and-write-graphql-queries)에서 GraphiQL 접근 방법 참고
 
+<br>
+
 GraphiQL에서 `allFile` 대신 `allMdx` 필드를 사용해서 블로그 게시물 데이터를 가져오는 새로운 쿼리를 생성한다.
 
 1. `allMdx` &rarr; `nodes` &rarr; `frontmatter` 드롭다운 목록을 차례로 클릭한다. 그러면 MDX 파일 내 frontmatter에서 생성했던 모든 키에 대한 필드를 볼 수 있다. `title`과 `date` 필드를 선택한다. `date` 필드의 인자로 `formatString`를 사용해 날짜가 표현되는 방식을 변경한다.
@@ -214,6 +216,9 @@ query MyQuery {
   }
 }
 ```
+
+<br>
+
 > **Syntax Hink**: `formatString` 인자는 날짜가 보이는 방식을 변경할 때 유용한 도구이다.<br><br>
 > frontmatter에서, `"YYYY-MM-DD"` 같은 날짜 포맷을 사용하는 key와 value를 가진다고 상상해 보자. (value만 필수 형식을 지키면 key에는 어떤 이름이 오든 상관 없다.) GraphiQL은 value가 날짜인지를 자동으로 감지하며, 상응하는 frontmatter field를 Explorer 창에서 선택할 때 GrahiQL은 해당 필드로 전달할 수 있는 인자 몇 개를 자동으로 보여준다. 그 인자 중 하나가 `formatString`인데, 이를 통해 [`Moment.js formatting token`](https://momentjs.com/docs/#/displaying/format/)을 전달해서 날짜 표시 방식을 변경할 수 있다.<br><br>
 > 예시: MDX frontmatter가 다음과 같다면,
@@ -286,6 +291,9 @@ query MyQuery {
 4. 게시물이 순서대로 나열되지 않았다. 대부분의 블로그 사이트는 게시물을 역순으로 나열해서 최신 게시물이 처음으로 배치된다. `allMdx` 필드에서 `sort` 인자를 사용함으로써 해당 데이터 노드를 정렬할 수 있다.
     - Explorer 창에서, `allMdx` 필드 아래에 있는 `sort`를 클릭한다.
     - `sort` 아래에 `frontmatter` 인자를 체크, date 드롭다운 목록에서 `DESC`를 선택한다. 그러면 노드가 내림차순(descending order)으로 정렬되어 마지막에 올린 게시물이 처음에 배치된다.
+
+<br>
+
 ```
 query MyQuery {
   allMdx(sort: { frontmatter: { date: DESC } }) {
@@ -357,6 +365,9 @@ query MyQuery {
 
 > :bulb: **Pro Tip:** transformer 플러그인은 새로운 노드를 생성할 때 이 노드의 오리지널 소스 노드를 참조하는 `parent` 필드를 추가한다. 예를 들어, `gatsby-plugin-mdx`는 새 MDX 노드를 생성할 때, 오리지널 File 노드의 데이터에 접근하는 데에 사용할 `parent`필드를 추가한다.<br>
 > transformed nodes의 데이터와 original source nodes의 데이터를 함께 사용하고 싶을 때 `parent` 노드는 유용하다. 예를 들어, 아래 쿼리는 파일이 변경된 시간을 알려주어서, 게시물이 마지막으로 업데이트된 때를 표기할 때 사용할 수 있다.
+
+<br>
+
 ```
 query MyQuery {
   allMdx {
@@ -371,7 +382,83 @@ query MyQuery {
 }
 ```
 
+<br>
+
 ### Task: 게시물 발췌 부분을 블로그 페이지에 렌더링
+
+Blog 페이지 컴포넌트 내 기존 페이지 쿼리를 세팅한 GraphQL 쿼리로 변경한다.
+
+1. `allFile`로 만든 페이지 쿼리를 `allMdx`로 생성한 것으로 변경한다. (쿼리 이름을 반드시 지운다!)
+
+2. 받은 데이터 필드를 사용하기 위해 JSX 부분을 변경한다. 
+    - filename 이외에도 다른 걸 렌더링할 것이므로, `<ul>`과 `<li>` 엘리먼트 대신 HTML의 시맨틱 엘리먼트 `<article>`을 사용한다.
+    - `id` 필드를 각 게시물의 유니크한 `key` prop으로 사용할 수 있다. (리액트는 `key` prop을 사용해서 재렌더링이 필요한 엘리먼트를 추적한다. 이를 포함하지 않을 경우 브라우저 콘솔에서 경고 메시지가 뜬다. `key` prp에 대한 자세한 설명은 [React Docs: List and Keys.](https://reactjs.org/docs/lists-and-keys.html#keys)을 참고)
+
+3. In the JSX for your Blog page render the value of the excerpt field. (JSX에 `excerpt` 필드 값 추가)
+
+<br>
+
+```js
+// imports
+
+const BlogPage = ({ data }) => {
+  return (
+    <Layout pageTitle="My Blog Posts">
+      {
+        data.allMdx.nodes.map((node) => (
+          <article key={node.id}>
+            <h2>{node.frontmatter.title}</h2>
+            <p>Posted: {node.frontmatter.date}</p>
+          </article>
+        ))
+      }
+    </Layout>
+  )
+}
+
+export const query = graphql`
+  query {
+    allMdx(sort: { frontmatter: { date: DESC }}) {
+      nodes {
+        frontmatter {
+          title
+          date(formatString: "MMMM DD, YYYY")
+        }
+        id
+        excerpt
+      }
+    }
+  }
+`
+
+export const Head = () => <Seo title="My Blog Posts" />
+
+export default BlogPage
+```
+
+4. `localhost:8000/blog` 화면
+![각 게시물의 제목, 날짜, 프리뷰를 보여주는 Blog 페이지](../../../images/blog-page-with-posts-date-exceprt.JPG)
+
+> :memo: **Note:** 쿼리가 반환한 excerpt는 HTML 태그를 포함하지 않아서, "My First Post"에 작성했던 순서없는 리스트가 제대로 렌더링되지 않는다. 이 부분은 후에 교정할 것이다.
+
+<br>
+
 ## 요약
+복습
+- transformer plgin이란? transformer 플러그인이 데이터 레이어 내 데이터에 미치는 영향은?
+- MDX란? MDX가 유용한 이유는?
+
+> **참고:** 변경한 내용을 GitHub에 푸시하면, Gatsby Cloud는 업데이트 내용을 인식하고 사이트를 최신 버전으로 다시 빌드해서 배포한다. (빌드 진행 과정은 [Gatsby Cloud dashboard](https://www.gatsbyjs.com/dashboard/)에서 확인)
+
+<br>
+
 ### Key takeaways
+- Gatsby의 GrpahQL 데이터 레이어에 있는 데이터는 **nodes**에 저장된다.
+- 각 소스 플러그인은 다른 필드를 다른 타입의 노드를 생성한다.
+- [transformer 플러그인은 기존 소스 노드의 데이터를 시작점으로 사용해서 새로운 노드를 생성한다. transformer 플러그인은 기존 소스 노드를 변경하지는 않는다.](https://www.gatsbyjs.com/docs/tutorial/part-5/#:~:text=Transformer%20plugins%20create%20new%20types%20of%20nodes%2C%20using%20data%20from%20existing%20source%20nodes%20as%20a%20starting%20point.%20Transformer%20plugins%20don%E2%80%99t%20actually%20change%20the%20original%20source%20nodes.)
+- `gatsby-plugin-mdx`는 MDX를 사용할 수 있게 하는 transformer 플러그인이다. MDX를 통해, 마크다운 서식과 내장 리액트 컴포넌트로 작성한 텍스트 컨텐츠를 생성할 수 있다.
+
+<br>
+
 ### 다음 장에서 배울 내용
+개츠비가 제공하는 filesystem route API를 사용해서, 각 게시물에 대한 새로운 페이지를 동적으로 생성하는 방법
