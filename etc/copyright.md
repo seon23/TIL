@@ -16,17 +16,9 @@
 
 ## 공식 문서별 라이선스 설명
 - [MDN - 저작자 표시 및 저작권 라이선싱](https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license#using_mdn_web_docs_content)
-    ~~- MDN 문서를 참조하고서 출처를 남길 때
-        > Mozilla 기여자가 작성한 [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)는 [CC-BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/) 라이선스에 따라 사용할 수 있습니다.~~
 - [The content behind MDN Web Docs](https://github.com/mdn/content/blob/main/LICENSE.md#licenses-for-mdn-content)
+- 
     - 적용한 라이선스를 LICENSE.md 파일 하나에 모두 명시하는 방식
-    - ~~내 TIL 레포에는 이 방식대로 라이선스를 표기할 것~~
 
 - [License under which the content behind Github Docs licensed](https://github.com/github/docs/blob/main/README.md#license)
     - 라이선스 명시한 파일 2개 만들고, README.md에 라이선스 관련 설명을 덧붙임.
----
-## P.S.
-그런데 대부분의 기술블로그가 본문 텍스트에 링크를 걸거나, 본문 하단에 참조 링크를 넣더라.
-- TIL에는 그냥 약식으로 출처 표기 하고,
-- 오픈소스 프로젝트 게시할 때에만 정확히 명시하는 게 나으려나?
-
