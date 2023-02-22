@@ -1,4 +1,6 @@
-# Create React App 공식 사이트 참고
+# Create React App 관련 메모
+
+## 2023. 02. 14.
 
 [You need to put any JS and CSS files inside src, otherwise webpack won’t see them.](https://create-react-app.dev/docs/folder-structure#:~:text=You%20need%20to%20put%20any%20JS%20and%20CSS%20files%20inside%20src%2C%20otherwise%20webpack%20won%E2%80%99t%20see%20them.)
 

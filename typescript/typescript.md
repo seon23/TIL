@@ -1,4 +1,6 @@
-# TypeScript
+# 타입스크립트 관련 메모
+
+## 2023. 2. 15.
 
 > Detecting errors in code without running it is referred to as _static_ checking. Determining what's an error and what's not based on the kinds of values being operated on is known as static _type_ checking.<br> > _출처:_ [_TypeScript for the New Programmer_](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html#typescript-a-static-type-checker)
 
@@ -24,8 +26,8 @@
 - 그리고 추가로 했던 말이, "함수와 배열은 objects at runtime이지만 각자의 predicate을 갖는다."인데, 이게 무슨 의미인지 모르겠다.
 
 ```ts
-type Combined = { a: number } & { b: string };
-type Conflicting = { a: number } & { a: string };
+type Combined = {a: number} & {b: string};
+type Conflicting = {a: number} & {a: string};
 ```
 
 > Intersection and union are recursive in case of conflicts, so `Conflicting.a: number & string`.  
