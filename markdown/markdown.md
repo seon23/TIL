@@ -1,4 +1,4 @@
-# 마크다운 문법
+# 마크다운 사용법
 [Markdown Guide](https://www.markdownguide.org/) 사이트 참고
 
 ## [줄바꿈](https://www.markdownguide.org/basic-syntax/#line-breaks)
