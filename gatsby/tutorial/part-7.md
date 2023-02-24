@@ -29,11 +29,11 @@
 
 ## 소개
 
-[Part 3](/docs/tutorial/part-3/)에서 `gatsby-plugin-image`를 사용하여 Home 페이지에 정적 이미지를 추가했었다. 개츠비의 데이터 레이어로 작업을 조금 해 보았으니, 이제 `gatsby-plugin-image`얘기를 다시 할 차례이다. 이번에는 사이트에 동적 이미지를 추가하는 방법을 배울 것이다.
+[Part 3](/docs/tutorial/part-3/)에서 `gatsby-plugin-image`를 사용하여 Home 페이지에 정적 이미지를 추가했었다. 개츠비의 데이터 레이어로 작업을 조금 해 보았으니, 이제 `gatsby-plugin-image`얘기를 다시 할 차례이다. 여기에서는 사이트에 동적 이미지를 추가하는 방법을 배울 것이다.
 
 이번 장에서는 동적 `GatsbyImage` 컴포넌트를 사용하여 블로그 게시물 각각에 히어로 이미지(hero image)를 추가해 본다.
 
-이 장을 마치고 나면 다음의 작업을 할 수 있게 된다.
+이 장을 마치고 나면 아래의 작업을 할 수 있다.
 
 - `GatsbyImage` 컴포넌트를 사용하여 데이터로부터 동적 이미지 생성
 
@@ -41,21 +41,21 @@
 
 ## `GatsbyImage`와 `StaticImage`의 차이점
 
-[Part 3](/docs/tutorial/part-3/)에서는 `gatsby-plugin-image`으로부터 `StaticImage` 컴포넌트를 사용하는 방법을 설명한다.
+[Part 3](/docs/tutorial/part-3/)에서는 `gatsby-plugin-image`으로부터 `StaticImage` 컴포넌트를 사용하는 방법을 설명했었다.
 
-`StaticImage` 컴포넌트를 사용해야할 까, `GatsbyImage` 컴포넌트를 사용해야할 까. 어떻게 알 수 있을까? 이는 결국 컴포넌트가 렌더링되는 모든 시기마다 동일한 이미지 소스를 사용할 지에 대한 문제이다.
+`StaticImage` 컴포넌트를 사용해야 하는지, `GatsbyImage` 컴포넌트를 사용해야 하는지, 어떻게 알 수 있을까? 이는 컴포넌트를 렌더링하는 모든 시기마다 동일한 이미지 소스를 사용할 건지에 대한 문제이다.
 
-- `StaticImage`는 _static(정적)_ 이미지 소스를 위한 컴포넌트이다. 하드 코딩으로 작성한 파일 path나 원격 URL처럼 말이다. 즉, 이 컴포넌트를 렌더링할 때마다 이미지 소스는 항상 동일하다.
-- `GatsbyImage`는 _dynamic(동적)_ 이미지 소스를 위한 컴포넌트이다. 이 경우에 이미지 소스는 prop 형태로 전달된다.
+- `StaticImage`는 하드 코딩으로 작성된 파일 경로나 원격 URL과 같은 '정적' 이미지 소스를 위한 컴포넌트이다. 즉, 이 컴포넌트를 렌더링할 때마다 이미지 소스는 항상 동일하다.
+- `GatsbyImage`는 prop으로 전달되는 이미지 소스같은 '동적' 이미지 소스를 위한 컴포넌트이다.
+  <br>
 
-<br>
+간단한 비유로 차이점을 설명하자면 다음과 같다.
 
-둘의 차이점을 이해하기 쉽게 비유해서 설명하자면 다음과 같다.
+- `StaticImage` 컴포넌트 사용은, "400 메인 스트리트"와 같은 물리 주소(physical address)로 방향을 묻는 것과 같다. 얼마나 많은 사람에게 물었는지와 상관없이 결국엔 같은 장소에 도착하는 경우이다.
+- `GatsbyImage` 컴포넌트 사용은, 보다 포괄적으로 방향을 묻는 것과 같다. 누군가에게 마을 내 최고의 커피숍을 묻는다면 누구에게 물었는지와 그 사람의 개인적인 선호가 무엇인지에 따라 결과가 달라진다.
 
-- `StaticImage` 컴포넌트 사용은, 물리 주소(physical address) "400 메인 스트리트"를 말하며 방향을 묻는 것과 같다. 얼마나 많은 사람에게 물었는지와 상관없이 결국엔 같은 장소에 도착한다.
-- `GatsbyImage` 컴포넌트 사용은, 보다 포괄적으로 방향을 묻는 것과 같다. 누군가에게 마을 내 최고의 커피숍을 묻는다면 결국 누구에게 물었는지와 그 사람의 개인적인 선호가 무엇인지에 따라 결과가 달라진다.
-
-![A side-by-side of two identical cartoon maps of a little town. The first, labeled "StaticImage", labels one of the houses "400 Main Street". The second, labeled "GatsbyImage", labels three of the houses with "coffee shop".](https://www.gatsbyjs.com/static/c6fccf3d19b405ef92dd65472a6fb8f4/a5262/staticimage-vs-gatsbyimage-towns.png)
+![StaticImage와 GatsbyImage 컴포넌트의 차이](https://www.gatsbyjs.com/static/c6fccf3d19b405ef92dd65472a6fb8f4/a5262/staticimage-vs-gatsbyimage-towns.png)
+_Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-7/, licensed under [MIT](https://opensource.org/licenses/MIT)._
 
 <br>
 
@@ -77,12 +77,15 @@
 > **Note:** .mdx`파일의 위치나 이름을 바꾼 후, 변경 사항이 적용되도록 로컬 개발 서버를 중단하고 다시 시작해야 한다.
 
 ![Diagram of moving each MDX file into its own subdirectory in the blog folder](https://www.gatsbyjs.com/static/f7150a9cc0e9f60b6d51c544ecc79117/1816f/reorganize-blog-directory.png)
+_Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-7/, licensed under [MIT](https://opensource.org/licenses/MIT)._
 
 2. [Unsplash](https://unsplash.com) 같은 웹사이트를 사용하여 자유롭게 사용할 수 있는 예쁜 이미지를 찾는다. 화면에 잘 맞도록 가로 방향 이미지를 선택한다.
    ![A screenshot of the Unsplash home page](https://www.gatsbyjs.com/static/c8cfa84caf6e939eb724737f03e6943f/60b3a/unsplash.png)
+   _Image from [Gatsby site](https://www.gatsbyjs.com/docs/tutorial/part-7/)_
 
 3. 마음에 드는 사진을 찾았으면 다운 받아 이를 특정 게시물에 대한 하위 디렉토리에 추가한다.
    ![Diagram of the "blog" folder structure, with the hero image for each post in the subdirectory for that post.](https://www.gatsbyjs.com/static/5cc60b117349ec93e6f1b59b34917a8e/60b3a/folder-structure-with-images.png)
+   _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-7/, licensed under [MIT](https://opensource.org/licenses/MIT)._
 
 > **Pro Tip:** 간혹 인터넷에서 다운로드한 이미지 품질이 너무 높을 때가 있다. 사이트에서 너비가 1000픽셀인 이미지까지만 렌더링한다면, 너비가 5000픽셀인 소스 이미지를 가져봐야 소용이 없다. 픽셀 제한을 초과하면, 이미지를 처리하고 최적화하는 작업이 더 필요하기 때문에 빌드 시간이 늘어날 수 있다.
 >
@@ -151,6 +154,9 @@ hero_image_credit_link: "https://unsplash.com/photos/7rriIaBH6JY"
 Gatsby가 빌드 시간에 노드를 데이터 레이어에 추가할 때, `gatsby-transformer-sharp` plugin은 `.png`, `.jpg` 같은 이미지 확장자를 갖는 모든 `File` 노드를 찾는다. 그리고 이 파일에 대한 `ImageSharp` 노드를 생성한다.
 
 ![A diagram showing how ImageSharp nodes get created from File nodes in the data layer](https://www.gatsbyjs.com/static/d710adc16d08d60f8919c62468ec0e8f/a5262/data-layer-with-imagesharp-nodes.png)
+_Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-7/, licensed under [MIT](https://opensource.org/licenses/MIT)._
+
+<br>
 
 1. In the terminal, run the following command to install `gatsby-transformer-sharp`를 설치하기 위해 터미널에서 다음의 명령을 실행한다.
 
@@ -420,12 +426,14 @@ const BlogPost = ({ data, children }) => {
    )
    ```
 
+<br>
+
 5. 이제 블로그의 각 게시물 페이지를 방문하면 페이지에 상응하는 히어로 이미지가 게시물 본문 위에 렌더링된 모습을 볼 수 있다.
-   ![A screenshot of the My First Post blog page, with a hero image of a gray pitbull relaxing on the sidewalk.](https://www.gatsbyjs.com/static/db0a95d0b713366aed2dae2b4312ad60/60b3a/blog-post-with-hero-image.png)
 
-   ![A screenshot of the Another Post blog page, with a hero image of a gray and white pitbull in a swimming pool.](https://www.gatsbyjs.com/static/14792977737184870eb709b281eedc78/60b3a/another-post.png)
-
+![A screenshot of the My First Post blog page, with a hero image of a gray pitbull relaxing on the sidewalk.](https://www.gatsbyjs.com/static/db0a95d0b713366aed2dae2b4312ad60/60b3a/blog-post-with-hero-image.png)
+![A screenshot of the Another Post blog page, with a hero image of a gray and white pitbull in a swimming pool.](https://www.gatsbyjs.com/static/14792977737184870eb709b281eedc78/60b3a/another-post.png)
    ![A screenshot of the Yet Another Post blog page, with a hero image of a dog wearing googly-eye glasses.](https://www.gatsbyjs.com/static/4d67e4eb42156d3c0392d9755f4fae11/60b3a/yet-another-post.png)
+   _Images by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-7/, licensed under [MIT](https://opensource.org/licenses/MIT)._
 
 <br>
 
@@ -475,6 +483,9 @@ export default BlogPost
 > **Syntax Hint:** `<p>` 태그를 보면 "Photo Credit:" 뒤에 `{" "}`이 있는데, 이는 콜론(`:`)과 링크 텍스트 사이에 공백을 렌더링하기 위해 넣은 것이다.
 
 ![A screenshot of the My First Post blog page, which now includes a photo credit underneath the hero image. It says, "Photo Credit: Christopher Ayme".](https://www.gatsbyjs.com/static/8cc2270946e50f9cca852ac956c7634b/60b3a/blog-post-with-hero-image-credit.png)
+_Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-7/, licensed under [MIT](https://opensource.org/licenses/MIT)._
+
+<br>
 
 > 개츠비가 제공하는 예제 사이트는 (https://github.com/gatsbyjs/tutorial-example)에서 확인할 수 있다.
 
@@ -511,8 +522,6 @@ export default BlogPost
 
 <br>
 
-### 개츠비 튜토리얼 완료
+## 튜토리얼 완료
 
-Congratulations, you've reached the end of the official Gatsby Tutorial! 🥳
-
-Want to know more? The next page includes some additional resources that you can use to continue learning about Gatsby.
+[더 알아보기](https://www.gatsbyjs.com/docs/tutorial/whats-next/)
