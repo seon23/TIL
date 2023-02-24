@@ -1,4 +1,4 @@
-# Part 4: Query for Data with GraphQL
+# Part 4: GraphQL로 데이터 쿼리
 
 > 이 글은 **Gatsbyjs**의 "[Part 4: Query for Data with GraphQL](https://www.gatsbyjs.com/docs/tutorial/part-4/)"을 재가공한 것입니다. 원본 문서는 [MIT 라이선스](https://opensource.org/licenses/MIT)에 따라 사용할 수 있습니다.
 

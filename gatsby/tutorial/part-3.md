@@ -1,4 +1,4 @@
-# Part 3: Add Features with Plugins
+# Part 3: 플러그인으로 기능 추가
 
 > 이 글은 **Gatsbyjs**의 "[Part 3: Add Features with Plugins](https://www.gatsbyjs.com/docs/tutorial/part-3/)"을 재가공한 것입니다. 원본 문서는 [MIT 라이선스](https://opensource.org/licenses/MIT)에 따라 사용할 수 있습니다.
 

@@ -1,4 +1,4 @@
-# Part 6: Create Pages Programmatically
+# Part 6: 프로그래밍 방식으로 페이지 생성
 
 > 이 글은 **Gatsbyjs**의 "[Part 6: Create Pages Programmtically](https://www.gatsbyjs.com/docs/tutorial/part-6/)"을 재가공한 것입니다. 원본 문서는 [MIT 라이선스](https://opensource.org/licenses/MIT)에 따라 사용할 수 있습니다.
 
