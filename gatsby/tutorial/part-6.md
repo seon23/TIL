@@ -457,9 +457,9 @@ export default BlogPage;
 
 > **Ship It!** 🚀
 
-사이트 변경 사항을 개츠비 클라우드에 배포해서 진행 경과를 공유할 수 있다.
+사이트 변경 사항을 개츠비 클라우드에 배포하여 진행 경과를 공유할 수 있다.
 
-먼저 터미널에서 다음의 명령을 실행해서 GitHub 레포지터리에 변경 사항을 push한다. (개츠비 사이트의 최상위 디렉토리에 있는지 확인이 필요하다.)
+먼저 터미널에서 다음 명령을 실행하여 GitHub 리포지터리에 변경 사항을 push한다. (개츠비 사이트의 최상위 디렉토리에 있는지 확인해야 한다!)
 
 > ```bash
 > git add .
@@ -467,7 +467,7 @@ export default BlogPage;
 > git push
 > ```
 >
-> 변경 사항이 GitHub에 push되고 나면, Gatsby Cloud가 업데이트를 감지한 후 사이트의 최신 버전을 다시 빌드해서 배포한다. (변경한 부분이 사이트에 반영되기까지 몇 분 정도 시간이 걸린다. 빌드 진행 과정은 [Gatsby Cloud dashboard](https://www.gatsbyjs.com/dashboard/)에서 확인할 수 있다.)
+> 변경 사항이 GitHub에 push되면 Gatsby Cloud가 업데이트를 인식한 후 사이트의 최신 버전을 다시 빌드 및 배포한다. (변경한 부분이 사이트에 반영되기까지 몇 분 정도 걸린다. 빌드 진행 과정은 [Gatsby Cloud dashboard](https://www.gatsbyjs.com/dashboard/)에서 확인할 수 있다.)
 
 ### 핵심 내용
 
