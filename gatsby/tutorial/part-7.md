@@ -508,11 +508,6 @@ export default BlogPost
 
 - 컴포넌트가 (상대 경로 또는 원격 URL로부터) 항상 동일한 이미지를 렌더링하는 경우 `StaticImage` 구성 요소를 사용한다.
 - 컴포넌트의 인스턴스가 각기 달라서 이미지 소스가 변경되는 경우 (예: 이미지 소스가 prop으로 전달되는 경우) `GatsbyImage` 컴포넌트를 사용한다.
-
-<br>
-
-### 개츠비 튜토리얼 완료
-
-Congratulations, you've reached the end of the official Gatsby Tutorial! 🥳
-
-Want to know more? The next page includes some additional resources that you can use to continue learning about Gatsby.
+   
+ ## 튜토리얼 완료
+ [더 알아보기](https://www.gatsbyjs.com/docs/tutorial/whats-next/)
