@@ -1,4 +1,4 @@
-# Part 7: 데이터로부터 동적 이미지 추가
+# Part 7: 데이터에서부터 동적 이미지 추가
 
 > 이 글은 **Gatsbyjs**의 "[Part 7: Add Dynamic Images from Data](https://www.gatsbyjs.com/docs/tutorial/part-7/)"을 재가공한 것입니다. 원본 문서는 [MIT 라이선스](https://opensource.org/licenses/MIT)에 따라 사용할 수 있습니다.
 
