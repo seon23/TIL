@@ -23,7 +23,7 @@ git mv <기존이름> <새로운이름>
 
 <br>
 
-## git 커밋 메시지 수정
+## git 커밋 메시지 수정 또는 삭제
 
 "[Changing a commit message](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/changing-a-commit-message)" 참고
 
@@ -86,3 +86,10 @@ git mv <기존이름> <새로운이름>
    ```bash
    $ git push --force 원격저장소명 브랜치명
    ```
+
+### 커밋 삭제
+
+참고 자료
+
+- owljoa. "[Rebase 활용한 특정 커밋 수정/제거.](https://velog.io/@owljoa/Rebase-%ED%99%9C%EC%9A%A9%ED%95%9C-%ED%8A%B9%EC%A0%95-%EC%BB%A4%EB%B0%8B-%EC%88%98%EC%A0%95%EC%A0%9C%EA%B1%B0)"
+-
