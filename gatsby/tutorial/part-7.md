@@ -1,5 +1,7 @@
 # Part 7: 데이터로부터 동적 이미지 추가
 
+> 이 글은 **Gatsbyjs**의 "[Part 7: Add Dynamic Images from Data](https://www.gatsbyjs.com/docs/tutorial/part-7/)"을 재가공한 것입니다. 원본 문서는 [MIT 라이선스](https://opensource.org/licenses/MIT)에 따라 사용할 수 있습니다.
+
 <details><summary>목차</summary>
 <p>
 
@@ -15,7 +17,7 @@
 
 - [작업: GraphiQL 사용하여 쿼리 빌드](#작업-graphiql-사용하여-쿼리-빌드)
 - [작업: `GatsbyImage` 컴포넌트 사용하여 히어로 이미지 추가](#작업-gatsbyimage-컴포넌트-사용하여-히어로-이미지-추가)
-- [작업: 히어로 이미지 아래에 크레딧 추가](#작업-히어로-이미지-아래에-크레딧-추가)
+- [작업: 히어로 이미지 밑에 크레딧 추가](#작업-히어로-이미지-밑에-크레딧-추가)
 
 [요약](#요약)
 
@@ -101,12 +103,10 @@
 title: "My First Post"
 date: "2021-07-23"
 slug: "my-first-post"
-// highlight-start
 hero_image: "./christopher-ayme-ocZ-_Y7-Ptg-unsplash.jpg"
 hero_image_alt: "A gray pitbull relaxing on the sidewalk with its tongue hanging out"
 hero_image_credit_text: "Christopher Ayme"
 hero_image_credit_link: "https://unsplash.com/photos/ocZ-_Y7-Ptg"
-// highlight-end
 ---
 
 ...
@@ -117,12 +117,10 @@ hero_image_credit_link: "https://unsplash.com/photos/ocZ-_Y7-Ptg"
 title: "Another Post"
 date: "2021-07-24"
 slug: "another-post"
-// highlight-start
 hero_image: "./anthony-duran-eLUBGqKGdE4-unsplash.jpg"
 hero_image_alt: "A grey and white pitbull wading happily in a pool"
 hero_image_credit_text: "Anthony Duran"
 hero_image_credit_link: "https://unsplash.com/photos/eLUBGqKGdE4"
-// highlight-end
 ---
 
 ...
@@ -133,12 +131,10 @@ hero_image_credit_link: "https://unsplash.com/photos/eLUBGqKGdE4"
 title: "Yet Another Post"
 date: "2021-07-25"
 slug: "yet-another-post"
-// highlight-start
 hero_image: "./jane-almon-7rriIaBH6JY-unsplash.jpg"
 hero_image_alt: "A white pitbull wearing big googly-eye glasses"
 hero_image_credit_text: "Jane Almon"
 hero_image_credit_link: "https://unsplash.com/photos/7rriIaBH6JY"
-// highlight-end
 ---
 
 ...
@@ -170,7 +166,7 @@ Gatsby가 빌드 시간에 노드를 데이터 레이어에 추가할 때, `gats
      },
      plugins: [
        // ...existing plugins
-       "gatsby-transformer-sharp", // highlight-line
+       "gatsby-transformer-sharp",
      ],
    }
    ```
@@ -226,11 +222,9 @@ query ($id: String) {
     frontmatter {
       title
       date(formatString: "MMMM D, YYYY")
-      // highlight-start
       hero_image_alt
       hero_image_credit_link
       hero_image_credit_text
-      // highlight-end
     }
   }
 }
@@ -264,29 +258,27 @@ query ($id: String) {
       hero_image_alt
       hero_image_credit_link
       hero_image_credit_text
-      // highlight-start
       hero_image {
         childImageSharp {
           gatsbyImageData
         }
       }
-      // highlight-end
     }
   }
 }
 ```
 
-<Announcement>
+> **Pro Tip:** GraphiQL은 `hero_image` frontmatter `hero_image` 필드에 다른 필드를 추가한다는 걸 어떻게 알까?
+>
+> Gatsby는 사이트를 빌드할 때 데이터 레이어에서 타입이 다른 데이터를 설명하는**schema**를 생성한다. Gatsby가 이 스키마를 빌드할 때 함에 따라 하면서 각 필드의 데이터 타입을 추측하려 한다. 이러한 과정을 **schema inference**라고 한다.
+>
+> <!-- Gatsby는 MDX frontmatter의 `hero_image` 필드가 `File` 노드에 상응함을(match) 알린다. 그래서 그 노드에 대한 `File` 필드를 요청할(query) 수 있는 것이다. 마찬가지로, `gatsby-transformer-sharp`가 해당 파일 이미지임을 알려, 그 노드에 대한 `ImageSharp` 필드를 요청할 수 있는 것이다. -->
+>
+> Gatsby can tell that the `hero_image` field from your MDX frontmatter matches a `File` node, so it lets you query the `File` fields for that node. Similarly, `gatsby-transformer-sharp` can tell that the file is an image, so it also lets you query the `ImageSharp` fields for that node.
 
-**Pro Tip:** How does GraphiQL know to add extra fields to the `hero_image` frontmatter field?
+<br>
 
-When Gatsby builds your site, it creates a GraphQL **schema** that describes the different types of data in the data layer. As Gatsby builds that schema, it tries to guess the type of data for each field. This process is called **schema inference**.
-
-Gatsby can tell that the `hero_image` field from your MDX frontmatter matches a `File` node, so it lets you query the `File` fields for that node. Similarly, `gatsby-transformer-sharp` can tell that the file is an image, so it also lets you query the `ImageSharp` fields for that node.
-
-</Announcement>
-
-4. Run your query to see what data you get back in the response. It should mostly look like the response you got back before, but this time with an extra `hero_image` object:
+4. 응답으로 무슨 데이터를 받을지 확인하기 위해 쿼리를 실행해 보자. 이전에 받아었던 응답과 대부분 유사하겠지만, 이번에는 `hero-image` 객체가 추가된다.
 
 ```json
 {
@@ -294,7 +286,6 @@ Gatsby can tell that the `hero_image` field from your MDX frontmatter matches a 
     "mdx": {
       "frontmatter": {
         // ...
-        // highlight-start
         "hero_image": {
           "childImageSharp": [
             {
@@ -321,7 +312,6 @@ Gatsby can tell that the `hero_image` field from your MDX frontmatter matches a 
             }
           ]
         }
-        // highlight-end
       }
     }
   },
@@ -329,23 +319,21 @@ Gatsby can tell that the `hero_image` field from your MDX frontmatter matches a 
 }
 ```
 
-If you take a closer look at the `gatsbyImageData` object on the `hero_image.childImageSharp` field, you'll see that it contains a bunch of information about the hero image for that post: dimensions, file paths for the images at different sizes, fallback images to use as a placeholder while the image loads. All this data gets calculated by `gatsby-plugin-sharp` at build time. The `gatsbyImageData` object in your response has the same structure that the `GatsbyImage` component needs to render an image.
+`hero_image.childImageSharp` 필드의 `gatsbyImageData` 객체를 자세히 보면, 게시물의 히어로 이미지에 대한 많은 정보를 포함하고 있음을 확인할 수 있다. 이는 이미지 치수, 크기가 각기 다른 이미지에 대한 파일 경로, 이미지를 불러오는 동안 placeholder로 사용할 fallback 이미지이다. 이 모든 데이터는 빌드 시간에 `gatsby-plugin-sharp`이 빌드 시간에 계산한다. 받은 응답의 `gatsbyImageData` 객체는 `GatsbyImage` 컴포넌트가 이미지를 렌더링하기위해 필요한 것과 동일한 구조이다.
 
-<Announcement>
+> **Note:** GraphiQL에서 `gatsbyImageData` 필드가 `aspectRatio`, `formats`, `width`같은 여러 인자에 접근하는 것을 보았을 수도 있다. 이 인자를 사용하여, Sharp 이미지를 처리 라이브러리가 최적화된 이미지를 생성하기를 어떻게 원하는지에 대한 데이터를 전달할 수 있다. (번역 수정 필요[https://www.gatsbyjs.com/docs/tutorial/part-7/#render-hero-image-in-the-blog-post-page-template:~:text=You%20can%20use%20these%20arguments%20to%20pass%20in%20extra%20data%20about%20how%20you%20want%20the%20Sharp%20image%20processing%20library%20to%20create%20your%20optimized%20images.])
+>
+> 이러한 옵션은 `StaticImage` 컴포넌트에 props로 전달했던 것과 동등하다.
+>
+> 추가 정보는 [`gatsby-plugin-image` Reference Guide](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/#image-options)에서 확인할 수 있다.
 
-**Note:** You might have noticed that the `gatsbyImageData` field in GraphiQL accepts several arguments, like `aspectRatio`, `formats`, or `width`. You can use these arguments to pass in extra data about how you want the Sharp image processing library to create your optimized images.
-
-These options are equivalent to the ones you would pass into the `StaticImage` component as props.
-
-For more information, see the [`gatsby-plugin-image` Reference Guide](/docs/reference/built-in-components/gatsby-plugin-image/#image-options).
-
-</Announcement>
+<br>
 
 ### 작업: `GatsbyImage` 컴포넌트 사용하여 히어로 이미지 추가
 
-Once you have your GraphQL query set up, you can add it to your blog post page template.
+GraphQL 쿼리를 설정하고 나면, 이를 블로그 게시물 페이지 템플릿에 추가할 수 있다.
 
-1. Replace your existing page query with the query you built in GraphiQL that includes the hero image frontmatter fields.
+1. Replace your existing page query with the query you built in GraphiQL that includes the hero image frontmatter fields. 기존 페이지 쿼리를 GraphiQL에서 생성한, 히어로 이미지 frontmatter 필드를 포함하는 쿼리로 교체한다.
 
    ```js:title=src/pages/blog/{mdx.frontmatter__slug}.js
    // imports
@@ -356,7 +344,6 @@ Once you have your GraphQL query set up, you can add it to your blog post page t
      )
    }
 
-   // highlight-start
    export const query = graphql`
      query($id: String) {
        mdx(id: {eq: $id}) {
@@ -375,32 +362,31 @@ Once you have your GraphQL query set up, you can add it to your blog post page t
        }
      }
    `
-   // highlight-end
 
    export const Head = ({ data }) => <Seo title={data.mdx.frontmatter.title} />
 
    export default BlogPost
    ```
 
-2. Import the `GatsbyImage` component and the `getImage` helper function from the `gatsby-plugin-image` package.
+2. `GatsbyImage` 컴포넌트와 `getImage` 헬퍼 함수를 `gatsby-plugin-image` 패키지로부터 import한다.
 
 ```js:title=src/pages/blog/{mdx.frontmatter_slug}.js
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image' // highlight-line
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
 
 // ...
 ```
 
-2. Use the `getImage` helper function to get back the `gatsbyImageData` object from the `hero_image` field.
+3. Use the `getImage` 헬퍼 함수를 사용하여 `hero_image` 필드로부터 `gatsbyImageData` 객체를 다시 가져온다.
 
 ```js:title=src/pages/blog/{mdx.frontmatter__slug}.js
 // imports
 
 const BlogPost = ({ data, children }) => {
-  const image = getImage(data.mdx.frontmatter.hero_image) // highlight-line
+  const image = getImage(data.mdx.frontmatter.hero_image)
 
   return (
     // ...
@@ -410,52 +396,46 @@ const BlogPost = ({ data, children }) => {
 // ...
 ```
 
-<Announcement>
+> **Note:** `getImage`는 `File`노드 또는 `ImageSharp` 노드를 가져와 이 노드에 대한`gatsbyImageData` 객체를 반환하는 헬퍼 함수이다. `getImage`를 사용하여 코드를 좀 더 깔끔하고 읽기 쉽게 유지할 수 있다.
+>
+> `getImage` 헬퍼 함수가 없으면`data.mdx.frontmatter.hero_image.childImageSharp.gatsbyImageData`을 입력해야 한다.
 
-**Note:** `getImage` is a helper function that takes in a `File` node or an `ImageSharp` node and returns the `gatsbyImageData` object for that node. You can use it to keep your code a little cleaner and easier to read.
+<br>
 
-Without the `getImage` helper function, you'd have to type out `data.mdx.frontmatter.hero_image.childImageSharp.gatsbyImageData` (which is longer, but gives you back the same data).
+4. `gatsby-plugin-image`로부터 `GatsbyImage` 컴포넌트를 사용하여 히어로 이미지 데이터를 렌더링한다. `GatsbyImage`에 prop 2개를 전달해야 한다.
 
-</Announcement>
-
-3. Use the `GatsbyImage` component from `gatsby-plugin-image` to render the hero image data. You should pass `GatsbyImage` two props:
-
-   - `image`: the `gatsbyImageData` object for your `hero_image` field
-   - `alt`: the alternative text for your image, from the `hero_image_alt` field
+   - `image`: `hero_image` 필드에 대한 `gatsbyImageData` 객체
+   - `alt`: `hero_image_alt` 필드에서 가져온, 이미지의 대체 텍스트
 
    ```js:title=src/pages/blog/{mdx.frontmatter__slug}.js
    return (
      <Layout pageTitle={data.mdx.frontmatter.title}>
        <p>Posted: {data.mdx.frontmatter.date}</p>
-       {/* highlight-start */}
        <GatsbyImage
          image={image}
          alt={data.mdx.frontmatter.hero_image_alt}
        />
-       {/* highlight-end */}
        {children}
      </Layout>
    )
    ```
 
-4. Now, when you visit each of your blog post pages, you should see the corresponding hero image rendered before the body of your post!
-   ![A screenshot of the My First Post blog page, with a hero image of a gray pitbull relaxing on the sidewalk.](./blog-post-with-hero-image.png)
+5. 이제 블로그의 각 게시물 페이지를 방문하면 페이지에 상응하는 히어로 이미지가 게시물 본문 위에 렌더링된 모습을 볼 수 있다.
+   ![A screenshot of the My First Post blog page, with a hero image of a gray pitbull relaxing on the sidewalk.](https://www.gatsbyjs.com/static/db0a95d0b713366aed2dae2b4312ad60/60b3a/blog-post-with-hero-image.png)
 
-   ![A screenshot of the Another Post blog page, with a hero image of a gray and white pitbull in a swimming pool.](./another-post.png)
+   ![A screenshot of the Another Post blog page, with a hero image of a gray and white pitbull in a swimming pool.](https://www.gatsbyjs.com/static/14792977737184870eb709b281eedc78/60b3a/another-post.png)
 
-   ![A screenshot of the Yet Another Post blog page, with a hero image of a dog wearing googly-eye glasses.](./yet-another-post.png)
+   ![A screenshot of the Yet Another Post blog page, with a hero image of a dog wearing googly-eye glasses.](https://www.gatsbyjs.com/static/4d67e4eb42156d3c0392d9755f4fae11/60b3a/yet-another-post.png)
 
-### 작업: 히어로 이미지 아래에 크레딧 추가
+<br>
 
-It's important to give credit to people whose work you use in your own site. The last piece of including hero images to your site is to add a paragraph to give credit to the photographer.
+### 작업: 히어로 이미지 밑에 크레딧 추가
 
-<Announcement>
+사용한 이미지를 작업한 사람들에게 크레딧을 제공하는 것이 중요하다.
 
-**Pro Tip:** Since the credit link goes to an external page (in other words, one that's not part of your site), you can use the `<a>` HTML tag instead of the Gatsby `Link` component.
-
-Remember, Gatsby's `Link` component only gives performance benefits for internal links to other pages within your site.
-
-</Announcement>
+> **Pro Tip:** 크레딧 링크를 클릭하면 외부 페이지로 이동하기 때문에, (즉, 내 사이트의 일부가 페이지로 이동하기 때문에) Gatsby의 `Link` 컴포넌트 대신에 `<a>` HTML 태그 `<a>`를 사용한다.
+>
+> Gatsby'의 `Link` 컴포넌트는 내 사이트 안에 있는 페이지 링크애 대해서만 성능 면의 이점을 제공한다는 점을 기억해라.
 
 ```js:title=src/pages/blog/{mdx.frontmatter__slug}.js
 // imports
@@ -470,14 +450,12 @@ const BlogPost = ({ data, children }) => {
         image={image}
         alt={data.mdx.frontmatter.hero_image_alt}
       />
-      {/* highlight-start */}
       <p>
         Photo Credit:{" "}
         <a href={data.mdx.frontmatter.hero_image_credit_link}>
           {data.mdx.frontmatter.hero_image_credit_text}
         </a>
       </p>
-      {/* highlight-end */}
       {children}
     </Layout>
   )
@@ -494,69 +472,47 @@ export default BlogPost
 
 <Announcement>
 
-**Syntax Hint:** You might have noticed that there's a `{" "}` after the "Photo Credit:" text `<p>` tag. That's to make sure that a space gets rendered between the colon (`:`) and the link text.
+> **Syntax Hint:** `<p>` 태그를 보면 "Photo Credit:" 뒤에 `{" "}`이 있는데, 이는 콜론(`:`)과 링크 텍스트 사이에 공백을 렌더링하기 위해 넣은 것이다.
 
-Try removing the `{" "}` and see what happens. The paragraph text should end up being "Photo Credit:Author".
+![A screenshot of the My First Post blog page, which now includes a photo credit underneath the hero image. It says, "Photo Credit: Christopher Ayme".](https://www.gatsbyjs.com/static/8cc2270946e50f9cca852ac956c7634b/60b3a/blog-post-with-hero-image-credit.png)
 
-</Announcement>
+> 개츠비가 제공하는 예제 사이트는 (https://github.com/gatsbyjs/tutorial-example)에서 확인할 수 있다.
 
-![A screenshot of the My First Post blog page, which now includes a photo credit underneath the hero image. It says, "Photo Credit: Christopher Ayme".](./blog-post-with-hero-image-credit.png)
-
-<Announcement>
-
-**Want to see how it all fits together?** Check out the finished state of the [GitHub repo for the example site](https://github.com/gatsbyjs/tutorial-example).
-
-</Announcement>
+<br>
 
 ## 요약
 
-Take a moment to think back on what you've learned so far. Challenge yourself to answer the following questions from memory:
+복습용 질문
 
-- When should you use the `GatsbyImage` component instead of the `StaticImage` component?
+- `StaticImage` 대신 `GatsbyImage` 컴포넌트를 사용해야 하는 경우는?
 
-<Announcement>
+<br>
 
 **Ship It!** 🚀
 
-Before you move on, deploy your changes to your live site on Gatsby Cloud so that you can share your progress!
+사이트 변경 사항을 개츠비 클라우드에 배포하여 진행 경과를 공유할 수 있다.
 
-First, run the following commands in a terminal to push your changes to your GitHub repository. (Make sure you're in the top-level directory for your Gatsby site!)
+먼저 터미널에서 다음 명령을 실행하여 GitHub 리포지터리에 변경 사항을 push한다. (개츠비 사이트의 최상위 디렉토리에 있는지 확인해야 한다!)
 
-```shell
-git add .
-git commit -m "Finished Gatsby Tutorial Part 7"
-git push
-```
+> ```bash
+> git add .
+> git commit -m "Finished Gatsby Tutorial Part 6"
+> git push
+> ```
+>
+> 변경 사항이 GitHub에 push되면 Gatsby Cloud가 업데이트를 인식한 후 사이트의 최신 버전을 다시 빌드 및 배포한다. (변경한 부분이 사이트에 반영되기까지 몇 분 정도 걸린다. 빌드 진행 과정은 [Gatsby Cloud dashboard](https://www.gatsbyjs.com/dashboard/)에서 확인할 수 있다.)
 
-Once your changes have been pushed to GitHub, Gatsby Cloud should notice the update and rebuild and deploy the latest version of your site. (It may take a few minutes for your changes to be reflected on the live site. Watch your build's progress from your [Gatsby Cloud dashboard](/dashboard/).)
-
-</Announcement>
+<br>
 
 ### 핵심 내용
 
-- Use the `StaticImage` component if your component always renders the same image (from a relative path or a remote URL).
-- Use the `GatsbyImage` component if the image source changes for different instances of your component (like if it gets passed in as a prop).
+- 컴포넌트가 (상대 경로 또는 원격 URL로부터) 항상 동일한 이미지를 렌더링하는 경우 `StaticImage` 구성 요소를 사용한다.
+- 컴포넌트의 인스턴스가 각기 달라서 이미지 소스가 변경되는 경우 (예: 이미지 소스가 prop으로 전달되는 경우) `GatsbyImage` 컴포넌트를 사용한다.
 
-<Announcement>
-
-**Share Your Feedback!**
-
-Our goal is for this Tutorial to be helpful and easy to follow. We'd love to hear your feedback about what you liked or didn't like about this part of the Tutorial.
-
-Use the "Was this doc helpful to you?" form at the bottom of this page to let us know what worked well and what we can improve.
-
-</Announcement>
+<br>
 
 ### 개츠비 튜토리얼 완료
 
 Congratulations, you've reached the end of the official Gatsby Tutorial! 🥳
 
 Want to know more? The next page includes some additional resources that you can use to continue learning about Gatsby.
-
-<LinkButton
-to="/docs/tutorial/whats-next/"
-rightIcon={<MdArrowForward />}
-variant="SECONDARY"
-
-> Continue to What's Next
-> </LinkButton>
