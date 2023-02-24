@@ -44,12 +44,12 @@
 
 ## Gatsby
 ### Tutorial
-- [Part2: Use and Style React Component
-](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-2.md)
-- [Part 3: Add Features with Plugins](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-3.md)
-- [Part 4: Query for Data with GraphQL](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-4.md)
-- [Part 5: Transform Data to Use MDX](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-5.md)
-- [Part 6: Create Pages Programmatically](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-6.md)
+- [Part2: 리액트 컴포넌트 사용 및 스타일 지정](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-2.md)
+- [Part 3: 플러그인으로 기능 추가](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-3.md)
+- [Part 4: GraphQL로 데이터 쿼리](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-4.md)
+- [Part 5: MDX 사용 위해 데이터 변환](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-5.md)
+- [Part 6: 프로그래밍 방식으로 페이지 생성](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-6.md)
+- [Part 7: 데이터로부터 동적 이미지 추가](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-7.md)
 
 <br>
 
@@ -64,5 +64,7 @@
 <br>
 
 ## ETC
-- [저작권, 라이센스 관련 정보](https://github.com/seon23/TIL/blob/main/etc/copyright.md)
+- [저작권, 라이선스 관련 정보](https://github.com/seon23/TIL/blob/main/etc/copyright.md)
 - [dependency](https://github.com/seon23/TIL/blob/main/etc/dependency.md)
+- [IT 번역 관련 정보](https://github.com/seon23/TIL/blob/main/etc/translation.md)
+- [에러, 오류, 버그, 결함 등의 용어 간 차이점](https://github.com/seon23/TIL/blob/main/etc/about-defect.md)
