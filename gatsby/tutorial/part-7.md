@@ -71,10 +71,10 @@ _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-7/, license
 
 <br>
 
-1. 모든 MDX 게시물로 `blog` 디렉토리를 구성하면서 시작한다. 먼저 `blog` 폴더 안에 각 게시물에 대한 하위 디렉토리를 생성한다. 그 다음 각 `.mdx` 파일의 이름을 `index.mdx`로 변경한다. (route가 `blog/my-post/my-post/`같은 중복 path parameter를 갖게 되는 상황을 막기 위함)
+1. 모든 MDX 게시물이 포함된 `blog` 디렉토리를 구성하면서 시작한다. 먼저 `blog` 폴더 안에 각 게시물에 대한 하위 디렉토리를 생성한다. 그 다음 각 `.mdx` 파일의 이름을 `index.mdx`로 변경한다. (route가 `blog/my-post/my-post/`같은 중복 path parameter를 갖게 되는 상황을 막기 위함)
    - 예를 들면 `blog/my-first-post.mdx`의 게시물이 `blog/my-first-post/index.mdx`로 이동한다. 마찬가지로 `blog/another-post.mdx`의 게시물이 `blog/another-post/index.mdx`로 이동한다.
 
-> **Note:** .mdx`파일의 위치나 이름을 바꾼 후, 변경 사항이 적용되도록 로컬 개발 서버를 중단하고 다시 시작해야 한다.
+> **Note:** `.mdx`파일의 위치나 이름을 바꾼 후, 변경 사항이 적용되도록 로컬 개발 서버를 중단하고 다시 시작해야 한다.
 
 ![Diagram of moving each MDX file into its own subdirectory in the blog folder](https://www.gatsbyjs.com/static/f7150a9cc0e9f60b6d51c544ecc79117/1816f/reorganize-blog-directory.png)
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-7/, licensed under [MIT](https://opensource.org/licenses/MIT)._
@@ -189,7 +189,7 @@ _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-7/, license
 
 먼저, GraphiQL을 사용하여 히어로 이미지 관련 frontmatter 필드를 블로그 게시물 페이지 템플릿의 GraphQL 쿼리에 추가한다.
 
-1. Open GraphiQL by going to 웹 브라우저에서 `localhost:8000/___graphql`을 방문하여 GraphiQL 연다. 현재 블로그 게시물 페이지 쿼리를 GrpahiQL 쿼리 편집창에 복사하면서 시작한다. 한 번 실행해서 모든 작업이 제대로 이루어지는 지 확인한다.
+1. 웹 브라우저에서 `localhost:8000/___graphql`을 방문하여 GraphiQL을 연다. 현재 블로그 게시물 페이지의 쿼리를 GrpahiQL 쿼리 편집창에 복사하면서 시작한다. 한 번 실행해서 모든 작업이 제대로 이루어지는 지 확인한다.
 
 > **Note:** Query Variables 창에서 특정 게시물에 대한 `id`를 가지고 객체를 설정해야할 것이다. 설정하는 법은 [Part 6 section on query variables](https://www.gatsbyjs.com/docs/tutorial/part-6/#render-post-contents-in-the-blog-post-page-template)을 참고하면 된다.
 
@@ -218,9 +218,9 @@ query ($id: String) {
 }
 ```
 
-2. 탐색 창에서 In the Explorer pane, check the boxes for the `hero_image_alt`, `hero_image_credit_link`, `hero_image_credit_text` 필드를 선택한다. 쿼리를 실행하면 아래의 JSON 객체와 같은 응답을 받는다.
+2. 탐색 창에서 `hero_image_alt`, `hero_image_credit_link`, `hero_image_credit_text` 필드를 선택한다. 쿼리를 실행하면 아래의 JSON 객체와 같은 응답을 받는다.
 
-> **Note:** 위 필드는 `frontmatter:` 인자(옥색) 말고, 아래에 있는 `frontmatter` 필드(파란색) 목록에서 확인할 수 있다.
+> **Note:** 위 필드는 `frontmatter:` 인자(옥색) 말고, 그 아래에 있는 `frontmatter` 필드(파란색) 목록에서 확인할 수 있다.
 
 ```graphql
 query ($id: String) {
@@ -274,13 +274,11 @@ query ($id: String) {
 }
 ```
 
-> **Pro Tip:** GraphiQL은 `hero_image` frontmatter `hero_image` 필드에 다른 필드를 추가한다는 걸 어떻게 알까?
+> **Pro Tip:** GraphiQL은 frontmatter의 `hero_image` 필드에 다른 필드를 추가한다는 걸 어떻게 알까?
 >
-> Gatsby는 사이트를 빌드할 때 데이터 레이어에서 타입이 다른 데이터를 설명하는**schema**를 생성한다. Gatsby가 이 스키마를 빌드할 때 함에 따라 하면서 각 필드의 데이터 타입을 추측하려 한다. 이러한 과정을 **schema inference**라고 한다.
+> Gatsby는 사이트를 빌드할 때 데이터 레이어의 다양한 타입의 데이터를 설명하는**schema**를 생성한다. Gatsby는 해당 스키마를 빌드하면서 각 필드의 데이터 타입을 추측하려 시도한다. 이러한 과정을 **schema inference**라고 한다.
 >
-> <!-- Gatsby는 MDX frontmatter의 `hero_image` 필드가 `File` 노드에 상응함을(match) 알린다. 그래서 그 노드에 대한 `File` 필드를 요청할(query) 수 있는 것이다. 마찬가지로, `gatsby-transformer-sharp`가 해당 파일 이미지임을 알려, 그 노드에 대한 `ImageSharp` 필드를 요청할 수 있는 것이다. -->
->
-> Gatsby can tell that the `hero_image` field from your MDX frontmatter matches a `File` node, so it lets you query the `File` fields for that node. Similarly, `gatsby-transformer-sharp` can tell that the file is an image, so it also lets you query the `ImageSharp` fields for that node.
+> Gatsby는 MDX frontmatter의 `hero_image` 필드가 `File` 노드에 상응함을(match) 알린다. 그래서 그 노드에 대한 `File` 필드를 요청할(query) 수 있는 것이다. 마찬가지로, `gatsby-transformer-sharp`가 해당 파일 이미지임을 알려, 그 노드에 대한 `ImageSharp` 필드를 요청할 수 있는 것이다.([정확한 원문](https://www.gatsbyjs.com/docs/tutorial/part-7/#:~:text=Gatsby%20can%20tell%20that%20the%20hero_image%20field%20from%20your%20MDX%20frontmatter%20matches%20a%20File%20node%2C%20so%20it%20lets%20you%20query%20the%20File%20fields%20for%20that%20node.%20Similarly%2C%20gatsby%2Dtransformer%2Dsharp%20can%20tell%20that%20the%20file%20is%20an%20image%2C%20so%20it%20also%20lets%20you%20query%20the%20ImageSharp%20fields%20for%20that%20node.))
 
 <br>
 
@@ -325,9 +323,9 @@ query ($id: String) {
 }
 ```
 
-`hero_image.childImageSharp` 필드의 `gatsbyImageData` 객체를 자세히 보면, 게시물의 히어로 이미지에 대한 많은 정보를 포함하고 있음을 확인할 수 있다. 이는 이미지 치수, 크기가 각기 다른 이미지에 대한 파일 경로, 이미지를 불러오는 동안 placeholder로 사용할 fallback 이미지이다. 이 모든 데이터는 빌드 시간에 `gatsby-plugin-sharp`이 빌드 시간에 계산한다. 받은 응답의 `gatsbyImageData` 객체는 `GatsbyImage` 컴포넌트가 이미지를 렌더링하기위해 필요한 것과 동일한 구조이다.
+`hero_image.childImageSharp` 필드의 `gatsbyImageData` 객체를 자세히 보면, 게시물의 히어로 이미지에 대한 많은 정보를 포함하고 있음을 확인할 수 있다. 이는 크기가 다른 이미지의 파일 경로, 이미지를 불러오는 동안 자리 표시자로 사용할 대체 이미지이다. `gatsby-plugin-sharp`이 빌드 시간에 해당 데이터를 모두 계산한다. 받은 응답의 `gatsbyImageData` 객체는 `GatsbyImage` 컴포넌트가 이미지를 렌더링하기위해 필요한 것과 구조가 동일하다.
 
-> **Note:** GraphiQL에서 `gatsbyImageData` 필드가 `aspectRatio`, `formats`, `width`같은 여러 인자에 접근하는 것을 보았을 수도 있다. 이 인자를 사용하여, Sharp 이미지를 처리 라이브러리가 최적화된 이미지를 생성하기를 어떻게 원하는지에 대한 데이터를 전달할 수 있다. (번역 수정 필요[https://www.gatsbyjs.com/docs/tutorial/part-7/#render-hero-image-in-the-blog-post-page-template:~:text=You%20can%20use%20these%20arguments%20to%20pass%20in%20extra%20data%20about%20how%20you%20want%20the%20Sharp%20image%20processing%20library%20to%20create%20your%20optimized%20images.])
+> **Note:** GraphiQL에서 `gatsbyImageData` 필드가 `aspectRatio`, `formats`, `width`같은 여러 인자에 접근하는 것을 보았을 수도 있다. 이 인자를 사용하여 이미지 처리 라이브러인 Sharp에, 최적화된 이미지를 생성할 때 필요한 데이터를 전달할 수 있다.(번역 수정 필요[https://www.gatsbyjs.com/docs/tutorial/part-7/#render-hero-image-in-the-blog-post-page-template:~:text=You%20can%20use%20these%20arguments%20to%20pass%20in%20extra%20data%20about%20how%20you%20want%20the%20Sharp%20image%20processing%20library%20to%20create%20your%20optimized%20images.])
 >
 > 이러한 옵션은 `StaticImage` 컴포넌트에 props로 전달했던 것과 동등하다.
 >
@@ -339,7 +337,7 @@ query ($id: String) {
 
 GraphQL 쿼리를 설정하고 나면, 이를 블로그 게시물 페이지 템플릿에 추가할 수 있다.
 
-1. Replace your existing page query with the query you built in GraphiQL that includes the hero image frontmatter fields. 기존 페이지 쿼리를 GraphiQL에서 생성한, 히어로 이미지 frontmatter 필드를 포함하는 쿼리로 교체한다.
+1. Replace your existing page query with the query you built in GraphiQL that includes the hero image frontmatter fields. 기존 페이지 쿼리 대신GraphiQL에서 생성한, frontmatter의 hero image 필드를 포함하는 쿼리를 입력한다.
 
    ```js:title=src/pages/blog/{mdx.frontmatter__slug}.js
    // imports
@@ -374,7 +372,7 @@ GraphQL 쿼리를 설정하고 나면, 이를 블로그 게시물 페이지 템�
    export default BlogPost
    ```
 
-2. `GatsbyImage` 컴포넌트와 `getImage` 헬퍼 함수를 `gatsby-plugin-image` 패키지로부터 import한다.
+2. `gatsby-plugin-image` 의 `GatsbyImage` 컴포넌트와 `getImage` 헬퍼 함수를 import한다.
 
 ```js:title=src/pages/blog/{mdx.frontmatter_slug}.js
 import * as React from 'react'
@@ -386,7 +384,7 @@ import Seo from '../../components/seo'
 // ...
 ```
 
-3. Use the `getImage` 헬퍼 함수를 사용하여 `hero_image` 필드로부터 `gatsbyImageData` 객체를 다시 가져온다.
+3. `getImage` 헬퍼 함수를 사용하여 `hero_image` 필드의 `gatsbyImageData` 객체를 가져온다.
 
 ```js:title=src/pages/blog/{mdx.frontmatter__slug}.js
 // imports
@@ -402,15 +400,15 @@ const BlogPost = ({ data, children }) => {
 // ...
 ```
 
-> **Note:** `getImage`는 `File`노드 또는 `ImageSharp` 노드를 가져와 이 노드에 대한`gatsbyImageData` 객체를 반환하는 헬퍼 함수이다. `getImage`를 사용하여 코드를 좀 더 깔끔하고 읽기 쉽게 유지할 수 있다.
+> **Note:** `getImage`는 `File`노드 또는 `ImageSharp` 노드를 가져와 이 노드에 대한 `gatsbyImageData` 객체를 반환하는 헬퍼 함수이다. `getImage`를 사용하여 코드를 좀 더 깔끔하고 읽기 쉽게 유지할 수 있다.
 >
-> `getImage` 헬퍼 함수가 없으면`data.mdx.frontmatter.hero_image.childImageSharp.gatsbyImageData`을 입력해야 한다.
+> `getImage` 헬퍼 함수가 없으면 대신 `data.mdx.frontmatter.hero_image.childImageSharp.gatsbyImageData`을 입력해야 한다.
 
 <br>
 
-4. `gatsby-plugin-image`로부터 `GatsbyImage` 컴포넌트를 사용하여 히어로 이미지 데이터를 렌더링한다. `GatsbyImage`에 prop 2개를 전달해야 한다.
+4. `gatsby-plugin-image`의 `GatsbyImage` 컴포넌트를 사용하여 히어로 이미지 데이터를 렌더링한다. `GatsbyImage`에 prop 2개를 전달해야 한다.
 
-   - `image`: `hero_image` 필드에 대한 `gatsbyImageData` 객체
+   - `image`: `hero_image` 필드의 `gatsbyImageData` 객체
    - `alt`: `hero_image_alt` 필드에서 가져온, 이미지의 대체 텍스트
 
    ```js:title=src/pages/blog/{mdx.frontmatter__slug}.js
@@ -439,11 +437,11 @@ const BlogPost = ({ data, children }) => {
 
 ### 작업: 히어로 이미지 밑에 크레딧 추가
 
-사용한 이미지를 작업한 사람들에게 크레딧을 제공하는 것이 중요하다.
+이미지를 사용할 때, 크레딧을 표기하여 저작자를 알려주는 것이 중요하다.
 
-> **Pro Tip:** 크레딧 링크를 클릭하면 외부 페이지로 이동하기 때문에, (즉, 내 사이트의 일부가 페이지로 이동하기 때문에) Gatsby의 `Link` 컴포넌트 대신에 `<a>` HTML 태그 `<a>`를 사용한다.
+> **Pro Tip:** 크레딧 링크를 클릭하면 외부 페이지로 이동하기 때문에, (즉, 내 사이트가 아닌 다른 페이지로 이동하기 때문에) Gatsby의 `Link` 컴포넌트 대신에 HTML의 `<a>` 태그를 사용한다.
 >
-> Gatsby'의 `Link` 컴포넌트는 내 사이트 안에 있는 페이지 링크애 대해서만 성능 면의 이점을 제공한다는 점을 기억해라.
+> Gatsby'의 `Link` 컴포넌트는 내 사이트 안에 있는 페이지 링크애 대해서만 성능 면의 이점을 제공한다는 점을 기억하자.
 
 ```js:title=src/pages/blog/{mdx.frontmatter__slug}.js
 // imports
@@ -480,7 +478,11 @@ export default BlogPost
 
 <Announcement>
 
-> **Syntax Hint:** `<p>` 태그를 보면 "Photo Credit:" 뒤에 `{" "}`이 있는데, 이는 콜론(`:`)과 링크 텍스트 사이에 공백을 렌더링하기 위해 넣은 것이다.
+> **Syntax Hint:** `<p>` 태그의 텍스트를 보면, "Photo Credit:" 뒤에 `{" "}`이 있다. 이는 콜론(`:`)과 링크 사이에 공백도 렌더링하기 위해 넣은 것이다.
+> 
+> `{" "}`을 제거하면 단락 텍스트로 "Photo Credit:Author"이 들어가게 된다.
+
+<br>
 
 ![A screenshot of the My First Post blog page, which now includes a photo credit underneath the hero image. It says, "Photo Credit: Christopher Ayme".](https://www.gatsbyjs.com/static/8cc2270946e50f9cca852ac956c7634b/60b3a/blog-post-with-hero-image-credit.png)
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-7/, licensed under [MIT](https://opensource.org/licenses/MIT)._
@@ -511,7 +513,7 @@ _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-7/, license
 > git push
 > ```
 >
-> 변경 사항이 GitHub에 push되면 Gatsby Cloud가 업데이트를 인식한 후 사이트의 최신 버전을 다시 빌드 및 배포한다. (변경한 부분이 사이트에 반영되기까지 몇 분 정도 걸린다. 빌드 진행 과정은 [Gatsby Cloud dashboard](https://www.gatsbyjs.com/dashboard/)에서 확인할 수 있다.)
+> 변경 사항이 GitHub에 push되면 Gatsby Cloud가 업데이트를 인식한 후 사이트 최신 버전을 다시 빌드 및 배포한다. (변경한 부분이 사이트에 반영되기까지 몇 분 정도 걸린다. 빌드 진행 과정은 [Gatsby Cloud dashboard](https://www.gatsbyjs.com/dashboard/)에서 확인할 수 있다.)
 
 <br>
 
