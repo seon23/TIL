@@ -32,4 +32,11 @@ HTML을 지원한다면 `<mark></mark>` 태그를 사용한다.
 <img src="image.png" width="200" height="100">
 ```
 
+### 삽입한 이미지가 보이지 않을 때
+참고 링크
+- [Markdown 로컬 이미지 삽입 문제](https://minsoftk.tistory.com/7)
+    - 경로 끝에 `?raw=true`를 붙인다.
+
+
+
 
