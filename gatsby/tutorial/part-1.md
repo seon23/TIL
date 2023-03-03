@@ -21,6 +21,8 @@
 </p>
 </details>
 
+<br>
+
 ## 소개
 
 필요한 모든 도구로 컴퓨터 설정을 완료했으니, 이제 시작할 시간입니다.
@@ -30,9 +32,12 @@
 - [완성된 사이트 예시](https://gatsbytutorialexample.gatsbyjs.io/)
 - [완성된 예시의 GitHub 리포지토리](https://github.com/gatsbyjs/tutorial-example)
 
+<br>
+
 이번 장에서는 블로그 사이트 템플릿을 생성하고 이를 모든 사람들이 볼 수 있도록 온라인에 배포하는 과정을 거칠 것입니다.
 
 아래 다이어그램은 이 과정이 어떻게 어우러지는 지를 개략적으로 보여줍니다.
+
 ![](../../images/deployment-workflow.png)  
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, licensed under [MIT](https://opensource.org/licenses/MIT)._
 
@@ -47,6 +52,8 @@ _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, license
 
 </p>
 </details>
+
+<br>
 
 ## Gatsby 사이트 생성
 
@@ -67,6 +74,8 @@ gatsby --version
 npm install -g gatsby-cli
 ```
 
+<br>
+
 과정을 자세히 살펴봅시다.
 
 1. 커맨드 라인을 열고, `cd` 명령을 사용하여 새 Gatsby 사이트를 생성하고 싶은 폴더로 디렉토리를 변경합니다. 예를 들어, 새로운 사이트를 desktop에 생성하고 싶다면 다음과 같이 입력하면 됩니다.
@@ -74,6 +83,8 @@ npm install -g gatsby-cli
 ```shell
 cd Desktop
 ```
+
+<br>
 
 2. 커맨드 라인에서 다음의 명령을 실행합니다. 이로써 새 Gatsby 사이트 생성에 도움을 주는 대화형 프롬프트가 시작됩니다.
 
@@ -83,21 +94,27 @@ gatsby new
 
 > **`gatsby new` 실행에 문제가 있습니까?** Part 0에서 `gatsby-cli`를 전역으로 설치할 때 문제가 있었다면, `gatsby new` 대신 `npm init gatsby`를 실행하여 새로운 사이트를 생성할 수 있습니다.
 
-3. 프롬프트에서 <b>"What would you like to call your site?"</b>라고 물으면 사이트 이름을 입력합니다.
+<br>
+
+3. 프롬프트에서 <b>What would you like to call your site?</b>라고 물으면 사이트 이름을 입력합니다.
 
 ```shell
 What would you like to call your site?
 ✔ · My First Gatsby Site
 ```
 
-4. 프롬프트에서 **“What would you like to name the folder where your site will be created?”**라고 물으면, 선택했던 사이트 이름에 기반한 디폴드 폴더 이름을 입력합니다.
+<br>
+
+4. 프롬프트에서 <b>“What would you like to name the folder where your site will be created?”</b>라고 물으면, 선택했던 사이트 이름에 기반한 디폴드 폴더 이름을 입력합니다.
 
 ```shell
 What would you like to name the folder where your site will be created?
 ✔ Desktop/ my-first-gatsby-site
 ```
 
-5. 프롬프트에서 **"Will you be using JavaScript or TypeScript?"**라고 물으면 **Javascript**를 선택합니다.
+<br>
+
+5. 프롬프트에서 <b>"Will you be using JavaScript or TypeScript?"</b>라고 물으면 **Javascript**를 선택합니다.
 
 ```shell
 Will you be using JavaScript or TypeScript?
@@ -107,7 +124,9 @@ Will you be using JavaScript or TypeScript?
 
 > 이 튜토리얼에서는 TypeScript에 관한 어떠한 사전 지식도 필요하지 않습니다. TypeScript에 익숙하다면 [Gatsby and TypeScript guide](https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/)를 읽어 타이핑, 파일, 규칙에 대해 배울 수 있습니다. TypeScript를 사용하고 싶다면, 먼저 튜토리얼을 거치고 나서야 프로젝트를 TypeScript로 변환하기를 권합니다.
 
-6. 프롬프트에서 **"Will you be using a CMS?"**라고 물으면 **"No (or I'll add it later)"**를 선택합니다. (나중에 수동으로 추가할 것입니다.)
+<br>
+
+6. 프롬프트에서 <b>"Will you be using a CMS?"</b>라고 물으면 <b>"No (or I'll add it later)"</b>를 선택합니다. (나중에 수동으로 추가할 것입니다.)
 
 ```shell
 ✔ Would you like to install a styling system?
@@ -118,6 +137,8 @@ Will you be using JavaScript or TypeScript?
 >
 > 하지만 이 첫 번째 사이트에서는 Gatsby의 조각이 어떻게 조합을 이루는 지를 배우기 위해 수동으로 설정할 것입니다.
 
+<br>
+
 7. 프롬프트에서 **“Would you like to install a styling system?”**라고 물으면 **“No (or I’ll add it later)”**를 선택합니다. (나중에 수동으로 추가할 것입니다.)
 
 ```shell
@@ -125,12 +146,16 @@ Will you be using JavaScript or TypeScript?
 · No (or I'll add it later)
 ```
 
-8. 프롬프트에서 **“Would you like to install additional features with other plugins?”**라고 물으면 방향키와 엔터키를 사용해서 **"Done"**을 선택합니다.
+<br>
+
+8. 프롬프트에서 **“Would you like to install additional features with other plugins?”**라고 물으면 방향키와 엔터키를 사용해서 <b>"Done"</b>을 선택합니다.
 
 ```shell
 ✔ Would you like to install additional features with other plugins?
 · Done
 ```
+
+<br>
 
 9. 프롬프트는 `gatsby new`가 할 작업을 요약해서 아래 출력처럼 보여줄 것입니다.
 
@@ -143,7 +168,9 @@ Thanks! Here's what we'll now do:
 ? Shall we do this? (Y/n) › Yes
 ```
 
-10. 프롬프트에서 **"Shall we do this?"**라고 물으면 **"Y"**를 입력합니다. 그러면 `gatsby new` 명령은 사이트를 구축하기 시작합니다. 이 때 인터넷 다운로드 속도가 해당 명령이 실행되는데 걸리는 시간에 영향을 미칩니다. 작업이 끝나면, 다음과 같은 메시지가 보일 것입니다.
+<br>
+
+10. 프롬프트에서 <b>"Shall we do this?"</b>라고 물으면 <b>"Y"</b>를 입력합니다. 그러면 `gatsby new` 명령은 사이트를 구축하기 시작합니다. 이 때 인터넷 다운로드 속도가 해당 명령이 실행되는데 걸리는 시간에 영향을 미칩니다. 작업이 끝나면, 다음과 같은 메시지가 보일 것입니다.
 
 ```shell
 🎉  Your new Gatsby site My First Gatsby Site has been successfully
@@ -212,7 +239,7 @@ schema
 
 4. 가장 선호하는 웹 브라우저를 열어 `http://localhost:8000`으로 이동합니다.
 
-![The default home page generated by the "gatsby new" command.](../../images/localhost-new-site.png)
+![The default home page generated by the "gatsby new" command.](../../images/localhost-new-site.png)  
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, licensed under [MIT](https://opensource.org/licenses/MIT)._
 
 <br>
@@ -231,14 +258,14 @@ GitHub은 많은 개발자들이 온라인에 코드를 백업, 공유하기 위
 
 1. GitHub의 각 코드베이스는 고유한 **저장소**(원어를 축약해서 "repo"라 칭하기도 합니다.)에 저장됩니다. 블로그용으로 새로운 저장소를 생성하려면 네비게이션 바 우측 상단에 보이는 더하기 아이콘을 클릭합니다. 그리고 "New repository"를 선택합니다.
 
-![A dropdown in the navigation bar reveals the "New repository" button.](../../images/new-repo-button.png)
+![A dropdown in the navigation bar reveals the "New repository" button.](../../images/new-repo-button.png)  
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, licensed under [MIT](https://opensource.org/licenses/MIT)._
 
 <br>
 
 2. 새 리포 양식을 작성할 때, 이를 public 또는 private으로 설정할 수 있습니다. (이는 GitHub에 저장된 코드의 가시성에만 영향을 미칩니다. 여러분의 사이트가 Gatsby Cloud를 통해 한 번 배포된 이후에는, 누구든 사이트를 볼 수 있습니다.) 초기화 옵션의 체크박스는 선택하지 않은 채로 둡니다.
 
-![The GitHub form to create a new repository. It's set to create a public repo called "my-first-gatsby-site". The options to add a README, .gitignore file, and license are unchecked.](../../images/new-repo-options.png)
+![The GitHub form to create a new repository. It's set to create a public repo called "my-first-gatsby-site". The options to add a README, .gitignore file, and license are unchecked.](../../images/new-repo-options.png)  
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, licensed under [MIT](https://opensource.org/licenses/MIT)._
 
 <br>
@@ -271,16 +298,16 @@ Gatsby Cloud는 Gatsby 사이트를 구축, 배포, 호스팅 하는 작업에 �
 
 GitHub에 저장된 코드를 Gatsby Cloud 계정에 연결하려면 다음을 실행하십시오.
 
-1. [Gatsby Cloud Dashboard](https://www.gatsbyjs.com/dashboard/)로 이동합니다. **"Add a site"** 버튼을 클릭합니다.
+1. [Gatsby Cloud Dashboard](https://www.gatsbyjs.com/dashboard/)로 이동합니다. <b>"Add a site"</b> 버튼을 클릭합니다.
 
-![An empty Gatsby Cloud dashboard](../../images/01-create-a-site-button.png)
+![An empty Gatsby Cloud dashboard](../../images/01-create-a-site-button.png)  
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, licensed under [MIT](https://opensource.org/licenses/MIT)._
 
 <br>
 
-2. 다음 몇 단계를 통해 여러분의 사이트를 Gatsby Cloud에 추가할 수 있습니다. 먼저, Git 제공자로 GitHub을 선택하기 위해 **"Import from a Git repository"** 카드에서 **"GitHub"** 아이콘을 클릭합니다.
+2. 다음 몇 단계를 통해 여러분의 사이트를 Gatsby Cloud에 추가할 수 있습니다. 먼저, Git 제공자로 GitHub을 선택하기 위해 <b>"Import from a Git repository"</b> 카드에서 <b>"GitHub"</b> 아이콘을 클릭합니다.
 
-![The "Add a site" screen. Select the option for "Import from a Git repository".](../../images/02-import-a-git-repo.png)
+![The "Add a site" screen. Select the option for "Import from a Git repository".](../../images/02-import-a-git-repo.png)  
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, licensed under [MIT](https://opensource.org/licenses/MIT)._
 
 <br>
@@ -291,37 +318,37 @@ _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, license
 
 <br>
 
-4. 새 브라우저 창이 열려, GitHub 저장소에 대한 권한을 Gatsby Cloud에 부여할 것인지를 GitHub이 물을 것입니다. Gatsby Cloud가 모든 GitHub 저장소에 접근하게 할 것인지, 생성했던 저장소(`my-first-gatsby0site`)에만 접근 권한을 부여할 것인지 선택할 수 있습니다. 다음으로 **"Install"**을 클릭합니다.
+4. 새 브라우저 창이 열려, GitHub 저장소에 대한 권한을 Gatsby Cloud에 부여할 것인지를 GitHub이 물을 것입니다. Gatsby Cloud가 모든 GitHub 저장소에 접근하게 할 것인지, 생성했던 저장소(`my-first-gatsby0site`)에만 접근 권한을 부여할 것인지 선택할 수 있습니다. 다음으로 <b>"Install"</b>을 클릭합니다.
 
-![The GitHub permissions page, asking whether you want to give Gatsby Cloud access to your repos. The "All repositories" option is selected.](../../images/03-github-gatsby-cloud-permissions.png)
+![The GitHub permissions page, asking whether you want to give Gatsby Cloud access to your repos. The "All repositories" option is selected.](../../images/03-github-gatsby-cloud-permissions.png)  
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, licensed under [MIT](https://opensource.org/licenses/MIT)._
 
 <br>
 
-5. 이제 Gatsby Cloud 창으로 돌아가면 저장소 목록에 여러분의 GitHub 저장소가 포함되어야 합니다. **"Import"**를 클릭하여 해당 저장소를 선택하십시오.
+5. 이제 Gatsby Cloud 창으로 돌아가면 저장소 목록에 여러분의 GitHub 저장소가 포함되어야 합니다. <b>"Import"</b>를 클릭하여 해당 저장소를 선택하십시오.
 
-![The "Select a Repository" dropdown in Gatsby Cloud lists the "my-first-gatsby-site" GitHub repository.](../../images/04-select-repository.png)
+![The "Select a Repository" dropdown in Gatsby Cloud lists the "my-first-gatsby-site" GitHub repository.](../../images/04-select-repository.png)  
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, licensed under [MIT](https://opensource.org/licenses/MIT)_
 
 <br>
 
-6. 저장소를 선택한 후에는 구성 단계로 이동하게 됩니다. 이를 통해 Gatsby 사이트용 GitHub 저장소에서 탐색해야할 위치를 Gatsby Cloud에 알려줄 수 있습니다. Gatsby Cloud에서 지정하게 될 사이트 이름을 변경할 수도 있습니다. **기본 설정을 그대로 두고**, **"Next"** 버튼을 클릭합니다.
+6. 저장소를 선택한 후에는 구성 단계로 이동하게 됩니다. 이를 통해 Gatsby 사이트용 GitHub 저장소에서 탐색해야할 위치를 Gatsby Cloud에 알려줄 수 있습니다. Gatsby Cloud에서 지정하게 될 사이트 이름을 변경할 수도 있습니다. **기본 설정을 그대로 두고**, <b>"Next"</b> 버튼을 클릭합니다.
 
-![The new fields. "Base Branch" is set to "main", "Base Directory" is set to "/", and "Site Name" is set to "my-first-gatsby-site-main".](../../images/05-add-site-details.png)
+![The new fields. "Base Branch" is set to "main", "Base Directory" is set to "/", and "Site Name" is set to "my-first-gatsby-site-main".](../../images/05-add-site-details.png)  
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, licensed under [MIT](https://opensource.org/licenses/MIT)_
 
 <br>
 
-7. Gatsby Cloud는 사이트에 통합헐 것이 있는지를 묻습니다. 향후 프로젝트에서 CMS를 사용하려 한다면 이 기능이 유용할 것입니다. 또한 Gatsby Cloud는 환경 변수를 추가할 것인지 묻습니다. 다시 말하자면 이는 향후 프로젝트에 유용하지만 지금 당장은 아닙니다. 밑으로 스크롤해서 **"Built Site"** 버튼을 클릭합니다.
+7. Gatsby Cloud는 사이트에 통합헐 것이 있는지를 묻습니다. 향후 프로젝트에서 CMS를 사용하려 한다면 이 기능이 유용할 것입니다. 또한 Gatsby Cloud는 환경 변수를 추가할 것인지 묻습니다. 다시 말하자면 이는 향후 프로젝트에 유용하지만 지금 당장은 아닙니다. 밑으로 스크롤해서 <b>"Built Site"</b> 버튼을 클릭합니다.
 
-![The "Integrations" tab of the "Add a site" screen.](../../images/06-integrations-and-environment-variables.png)
+![The "Integrations" tab of the "Add a site" screen.](../../images/06-integrations-and-environment-variables.png)  
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, licensed under [MIT](https://opensource.org/licenses/MIT)_
 
 <br>
 
 8. 이제 사이트가 생성되었으니 구축 상태를 확인할 수 있는 사이트 대시보드로 이동합니다. Gatsby Cloud는 자동으로 사이트를 구축하기 시작합니다. 여기서 새 사이트의 링크를 확인할 수 있는데, 이는 Gatsby Cloud에서 자동으로 호스팅됩니다. 해당 링크를 누구와도 공유할 수 있으며, 그들은 온라인에서 이 사이트를 볼 수 있습니다!
 
-![The Gatsby Cloud dashboard for a new site.](../../images/07-site-page.png)
+![The Gatsby Cloud dashboard for a new site.](../../images/07-site-page.png)  
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, licensed under [MIT](https://opensource.org/licenses/MIT)_
 
 <br>
@@ -354,6 +381,8 @@ _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, license
 </p>
 </details>
 
+<br>
+
 ### 핵심 내용
 
 - 커맨드 라인에서 새 Gatsby 사이트를 생성하려면, `gatsby new` 명령을 실행합니다.
@@ -361,4 +390,8 @@ _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, license
 - Gatsby Cloud는 Gatsby 사이트 구축, 배포, 호스팅에 특별히 최적화된 인프라 플랫폼입니다.
   - 새로운 커밋을 GitHub 저장소의 `main` 브랜치에 푸시하면, Gatsby Cloud는 변경 사항을 감지하여 사이트를 새 버전으로 다시 구축한 후 이를 재배포합니다.
 
+<br>
+
 ### 다음에 배울 내용
+
+기본 Gatsby 사이트가 실행 중이므로, 이를 자신만의 사이트로 만들 시간입니다. 튜토리얼 Part 2에서는 React를 사용하여 사이트 디자인과 컨텐츠를 맞춤 설정하는 방법을 배울 것입니다.
