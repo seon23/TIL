@@ -44,6 +44,7 @@
 
 ## Gatsby
 ### Tutorial
+- [Part1: Gatsby 사이트 생성 및 배포](./gatsby/tutorial/part-1.md)
 - [Part2: 리액트 컴포넌트 사용 및 스타일 지정](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-2.md)
 - [Part 3: 플러그인으로 기능 추가](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-3.md)
 - [Part 4: GraphQL로 데이터 쿼리](https://github.com/seon23/TIL/blob/main/gatsby/tutorial/part-4.md)
