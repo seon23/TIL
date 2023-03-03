@@ -33,7 +33,7 @@
 이번 장에서는 블로그 사이트 템플릿을 생성하고 이를 모든 사람들이 볼 수 있도록 온라인에 배포하는 과정을 거칠 것입니다.
 
 아래 다이어그램은 이 과정이 어떻게 어우러지는 지를 개략적으로 보여줍니다.
-![](../../images/deployment-workflow.png)
+![](../../images/deployment-workflow.png)  
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, licensed under [MIT](https://opensource.org/licenses/MIT)._
 
 <details><summary>자세한 설명</summary>
@@ -52,7 +52,7 @@ _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, license
 
 Gatsby 사이트를 생성하기 위해, Gatsby 커맨드 라인 인터페이스 (CLI)의 명령 `gatsby new`를 사용합니다. 해당 명령어는 구축할 사이트에 관해 묻는 대화형 프롬프트를 화면에 띄웁니다. 모든 정보를 입력하면, CLI는 이에 맞는 새 Gatsby 사이트를 자동으로 생성합니다.
 
-![](../../images/gatsby-new-cli.png)
+![](../../images/gatsby-new-cli.png)  
 _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, licensed under [MIT](https://opensource.org/licenses/MIT)._
 
 > **Note:** 이 튜토리얼을 따르려면 Gatsby CLI가 v4.8 이상이어야 합니다. 설치한 버전을 확인하려면 다음의 명령을 실행하십시오.
@@ -83,7 +83,7 @@ gatsby new
 
 > **`gatsby new` 실행에 문제가 있습니까?** Part 0에서 `gatsby-cli`를 전역으로 설치할 때 문제가 있었다면, `gatsby new` 대신 `npm init gatsby`를 실행하여 새로운 사이트를 생성할 수 있습니다.
 
-3. 프롬프트에서 **"What would you like to call your site?"**라고 물으면 사이트 이름을 입력합니다.
+3. 프롬프트에서 <b>"What would you like to call your site?"</b>라고 물으면 사이트 이름을 입력합니다.
 
 ```shell
 What would you like to call your site?
@@ -359,6 +359,6 @@ _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, license
 - 커맨드 라인에서 새 Gatsby 사이트를 생성하려면, `gatsby new` 명령을 실행합니다.
 - 사이트를 로컬에서 실행하려면, `gatsby develop` 명령을 사용합니다. `localhost:8000`에서 구동하는 웹 브라우저에서 여러분의 사이트를 볼 수 있습니다.
 - Gatsby Cloud는 Gatsby 사이트 구축, 배포, 호스팅에 특별히 최적화된 인프라 플랫폼입니다.
-  - 새로운 커밋을 GitHub 저장소의 `main` 브랜치에 푸시하면, Gatsby Cloud는 변경 사항을 감지해서 사이트를 새 버전으로 다시 구축한 후 이를 재배포합니다.
+  - 새로운 커밋을 GitHub 저장소의 `main` 브랜치에 푸시하면, Gatsby Cloud는 변경 사항을 감지하여 사이트를 새 버전으로 다시 구축한 후 이를 재배포합니다.
 
 ### 다음에 배울 내용
