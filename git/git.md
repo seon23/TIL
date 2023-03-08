@@ -25,7 +25,11 @@ git mv <기존이름> <새로운이름>
 
 ## git 커밋 메시지 수정 또는 삭제
 
-"[Changing a commit message](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/changing-a-commit-message)" 참고
+참고할 자료
+
+- "[Changing a commit message](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/changing-a-commit-message)"
+
+<br>
 
 ### 직전 커밋 수정
 
@@ -89,7 +93,18 @@ git mv <기존이름> <새로운이름>
 
 ### 커밋 삭제
 
-참고 자료
-
 - owljoa. "[Rebase 활용한 특정 커밋 수정/제거.](https://velog.io/@owljoa/Rebase-%ED%99%9C%EC%9A%A9%ED%95%9C-%ED%8A%B9%EC%A0%95-%EC%BB%A4%EB%B0%8B-%EC%88%98%EC%A0%95%EC%A0%9C%EA%B1%B0)"
--
+
+<br>
+
+## 브랜치 관련 명령
+
+1. 원격 저장소에서는 삭제된 브랜치가 로컬에는 남아있을 때 다음 명령 중 하나를 실행하면 동기화된다.
+
+   ```shell
+   # 둘 중 하나 입력
+   git fetch --all --prune
+   git remote prune origin
+   ```
+
+   _출처: "[로컬에서 원격 브랜치 삭제하기](https://remagine.tistory.com/17)"_
