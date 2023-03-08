@@ -396,4 +396,4 @@ _Image by Gatsbyjs, from https://www.gatsbyjs.com/docs/tutorial/part-1/, license
 
 ### 다음에 배울 내용
 
-기본 Gatsby 사이트가 실행 중이므로, 이를 자신만의 사이트로 만들 시간입니다. 튜토리얼 Part 2에서는 React를 사용하여 사이트 디자인과 컨텐츠를 맞춤 설정하는 방법을 배울 것입니다.
+기본 Gatsby 사이트가 실행 중이므로, 이를 여러분만의 사이트로 만들 시간입니다. 튜토리얼 Part 2에서는 React를 사용하여 사이트 디자인과 컨텐츠를 맞춤 설정하는 방법을 배울 것입니다.
